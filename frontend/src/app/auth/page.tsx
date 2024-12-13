@@ -9,6 +9,9 @@ const Auth = () => {
       <button onClick={() => signIn("github", { redirectTo: "/" })}>
         Signin with GitHub
       </button>
+      <button onClick={() => signIn("google", { redirectTo: "/" })}>
+        Signin with Google
+      </button>
     </div>
   )
 }
