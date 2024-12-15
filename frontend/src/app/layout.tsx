@@ -20,7 +20,7 @@ const RootLayout = ({
         <ThemeLayout>
           <SessionProvider>
             <AuthLayout>
-              <main className="w-full min-h-screen px-2 tablet:px-4 laptop:px-40 max-w-[1600px] mx-auto">
+              <main className="w-full h-full min-h-screen px-2 tablet:px-4 laptop:px-40 max-w-[1600px] mx-auto">
                 {children}
               </main>
             </AuthLayout>

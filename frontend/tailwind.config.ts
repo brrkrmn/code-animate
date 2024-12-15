@@ -9,6 +9,11 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      mobile: "425px",
+      tablet: "600px",
+      laptop: "1024px",
+    },
     extend: {
       colors: {
         background: "var(--background)",
