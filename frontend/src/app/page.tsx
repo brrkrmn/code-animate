@@ -1,12 +1,28 @@
+"use client"
+
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Home = () => {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <Link href="auth">Login</Link>
-    </div>
-  );
-}
+  const { status } = useSession();
 
+  if (status === "unauthenticated") {
+    return (
+      <div>
+        <p>You are not logged in</p>
+        <Link href="auth">Login</Link>
+      </div>
+    );
+  }
+  if (status === "authenticated") {
+    return (
+      <>
+        <p>You are logged in</p>
+        <Link href="dashboard">Dashboard</Link>
+        <button onClick={() => signOut()}>Log out</button>
+      </>
+    )
+  }
+}
 
 export default Home;
