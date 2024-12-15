@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { Geist, Geist_Mono } from "next/font/google";
 import AuthLayout from "./authLayout";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import ThemeLayout from "./themeLayout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,17 +16,15 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SessionProvider>
-          <AuthLayout>
-            {children}
-          </AuthLayout>
-        </SessionProvider>
+      <body className="antialiased">
+        <ThemeLayout>
+          <SessionProvider>
+            <AuthLayout>{children}</AuthLayout>
+          </SessionProvider>
+        </ThemeLayout>
       </body>
     </html>
   );
-}
+};
 
 export default RootLayout;
