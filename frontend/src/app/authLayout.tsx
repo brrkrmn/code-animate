@@ -1,5 +1,6 @@
 "use client"
 
+import Loading from "@/components/Loading/Loading";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   }, [status, pathname, router]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   } else {
     return <>{children}</>;
   }
