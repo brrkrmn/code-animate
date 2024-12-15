@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 const Auth = () => {
   return (
     <div>
-      <p>You are not logged in</p>
+      <p>LOGIN PAGE</p>
       <button onClick={() => signIn("github", { redirectTo: "/" })}>
         Signin with GitHub
       </button>
@@ -12,7 +12,7 @@ const Auth = () => {
         Signin with Google
       </button>
     </div>
-  )
+  );
 }
 
 export default Auth;

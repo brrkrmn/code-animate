@@ -1,7 +1,14 @@
+"use client";
+
+import { signOut } from "next-auth/react";
+
 const Dashboard = () => {
   return (
-    <p>dashboard -- protected page</p>
-  )
-}
+    <div>
+      <p>DASHBOARD</p>
+      <button onClick={() => signOut()}>Log out</button>
+    </div>
+  );
+};
 
 export default Dashboard;
