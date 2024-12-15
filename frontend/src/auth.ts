@@ -11,5 +11,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return !!auth;
     },
   },
+  logger: {
+    error(code, ...message) {
+      console.log(code, message);
+    },
+    warn(code, ...message) {
+      console.log(code, message);
+    },
+    debug(code, ...message) {
+      console.log(code, message);
+    },
+  },
   ...authConfig,
-})
+});
