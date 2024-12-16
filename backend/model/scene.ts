@@ -25,10 +25,6 @@ export type SceneDocument = Document & {
 };
 
 const StepSchema = new Schema<StepDocument>({
-  id: {
-    type: Number,
-    required: true,
-  },
   number: {
     type: Number,
   },
@@ -49,7 +45,7 @@ const SceneSchema = new Schema<SceneDocument>(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: "Account",
+      ref: "User",
       required: true,
     },
     title: {

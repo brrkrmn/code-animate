@@ -1,12 +1,11 @@
 import { Request, Response, Router } from "express";
-import { AccountDocument } from "../model/account";
 import { Scene, SceneDocument } from "../model/scene";
 import { User, UserDocument } from "../model/user";
 
 const scenesRouter = Router();
 
 scenesRouter.get("/", async (req: Request, res: Response) => {
-  const user = req.user as AccountDocument;
+  const user = req.user as UserDocument;
   const userScenes = (await Scene.find({ user: user._id }).populate(
     "user"
   )) as SceneDocument[];
@@ -14,20 +13,24 @@ scenesRouter.get("/", async (req: Request, res: Response) => {
 });
 
 scenesRouter.get("/:id", async (req: Request, res: Response) => {
-  const user = req.user as AccountDocument;
+  const user = req.user as UserDocument;
   const scene = (await Scene.findById(req.params.id).populate(
     "user"
   )) as SceneDocument;
 
+  if (!scene) {
+    res.status(404).json({ error: "Document not found" });
+  }
+
   if (scene.user.id === user.id) {
     res.json(scene);
   } else {
-    res.status(403).json({ error: "Unauthorized" });
+    res.status(403).json({ error: "User not authorized to view the document" });
   }
 });
 
 scenesRouter.post("/", async (req: Request, res: Response) => {
-  const user = req.user as AccountDocument;
+  const user = req.user as UserDocument;
   const body = req.body;
 
   const scene = new Scene({
@@ -40,12 +43,13 @@ scenesRouter.post("/", async (req: Request, res: Response) => {
 
   const savedScene = await scene.save();
   user.scenes = user.scenes.concat(savedScene.id);
+  await user.save();
 
   res.status(201).json(savedScene);
 });
 
 scenesRouter.put("/:id", async (req: Request, res: Response) => {
-  const user = req.user as AccountDocument;
+  const user = req.user as UserDocument;
   const body = req.body;
   const scene = (await Scene.findById(req.params.id).populate(
     "user"

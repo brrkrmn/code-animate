@@ -1,5 +1,4 @@
 import mongoose, { Document } from "mongoose";
-import { SceneDocument } from "./scene";
 import { UserDocument } from "./user";
 
 const { Schema } = mongoose;
@@ -16,7 +15,6 @@ export type AccountDocument = Document & {
   scope: string;
   id_token: string;
   session_state: string;
-  scenes: SceneDocument[];
   createdAt: Date;
   updatedAt: Date;
 };
@@ -47,12 +45,6 @@ const AccountSchema = new Schema<AccountDocument>(
     scope: { type: String },
     id_token: { type: String },
     session_state: { type: String },
-    scenes: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Scene",
-      },
-    ],
   },
   {
     timestamps: true,

@@ -1,4 +1,5 @@
 import mongoose, { Document } from "mongoose";
+import { SceneDocument } from "./scene";
 
 const { Schema } = mongoose;
 
@@ -9,6 +10,7 @@ export type UserDocument = Document & {
   image: string;
   createdAt: Date;
   updatedAt: Date;
+  scenes: SceneDocument[];
 };
 
 const UserSchema = new Schema<UserDocument>(
@@ -17,6 +19,12 @@ const UserSchema = new Schema<UserDocument>(
     email: { type: String, unique: true, required: true },
     emailVerified: { type: Date },
     image: { type: String },
+    scenes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Scene",
+      },
+    ],
   },
   {
     timestamps: true,
