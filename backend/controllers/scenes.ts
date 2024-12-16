@@ -55,8 +55,14 @@ scenesRouter.put("/:id", async (req: Request, res: Response) => {
     "user"
   )) as SceneDocument;
 
+  if (!scene) {
+    res.status(404).json({ error: "Document not found" });
+  }
+
   if (scene.user.id !== user.id) {
-    res.status(403).json({ error: "Unauthorized" });
+    res
+      .status(403)
+      .json({ error: "User not authorized to change the document" });
   }
 
   const newScene = {
@@ -86,10 +92,14 @@ scenesRouter.delete("/:id", async (req: Request, res: Response) => {
     "user"
   )) as SceneDocument;
 
+  if (!scene) {
+    res.status(404).json({ error: "Document not found" });
+  }
+
   if (scene.user.id !== user.id) {
     res
       .status(403)
-      .json({ error: "User not authorized to delete this document. " });
+      .json({ error: "User not authorized to delete the document" });
   }
 
   await Scene.findByIdAndDelete(req.params.id);
