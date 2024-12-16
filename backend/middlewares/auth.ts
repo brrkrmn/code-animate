@@ -4,7 +4,8 @@ import { User } from '../model/user';
 
 export const extractUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization
+    const token = req.headers.authorization?.split(" ")[1];
+
     if (!token) {
       return next();
     }
@@ -24,14 +25,38 @@ export const extractUser = async (req: Request, res: Response, next: NextFunctio
   } catch (err) {
     next();
   }
-}
+};
 
-export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
+export const authenticateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const user = req.user;
 
   if (!user) {
-    res.status(401).json({ error: "Unauthorized" })
+    res.status(401).json({ error: "Unauthorized" });
   }
 
-  next()
-}
+  next();
+};
+
+export const errorHandler = (
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log("Error:", error.message);
+
+  if (error.name === "CastError") {
+    res.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    res.status(400).json({ error: error.message });
+  } else if (error.name === "JsonWebTokenError") {
+    res.status(401).json({ error: error.message });
+  } else if (error.name === "TokenExpiredError") {
+    res.status(401).json({ error: "token expired" });
+  }
+  next(error);
+};
