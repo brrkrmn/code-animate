@@ -3,7 +3,8 @@ import express from 'express';
 import 'express-async-errors';
 import mongoose from 'mongoose';
 import authRouter from './controllers/auth';
-import { extractUser } from './middlewares/auth';
+import scenesRouter from "./controllers/scenes";
+import { authenticateUser, extractUser } from "./middlewares/auth";
 import { MONGODB_URI } from './utils/config';
 const app = express()
 
@@ -23,5 +24,6 @@ app.use(cors());
 app.use(extractUser);
 
 app.use('/api/auth', authRouter)
+app.use("/api/scenes", authenticateUser, scenesRouter);
 
 export default app
