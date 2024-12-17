@@ -1,4 +1,5 @@
 export type Scene = {
+  id: string;
   user: string;
   title: string;
   public: boolean;
