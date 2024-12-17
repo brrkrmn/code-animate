@@ -1,8 +1,10 @@
+import ReactQueryProvider from "@/providers/ReactQueryProvider/ReactQueryProvider";
+import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import React from "react";
 import AuthLayout from "./authLayout";
 import "./globals.css";
-import ThemeLayout from "./themeLayout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,15 +19,17 @@ const RootLayout = ({
   return (
     <html className="bg-black" lang="en">
       <body className="antialiased">
-        <ThemeLayout>
-          <SessionProvider>
-            <AuthLayout>
-              <main className="w-full h-full min-h-screen px-2 tablet:px-4 laptop:px-40 max-w-[1600px] mx-auto">
-                {children}
-              </main>
-            </AuthLayout>
-          </SessionProvider>
-        </ThemeLayout>
+        <ReactQueryProvider>
+          <ThemeProvider>
+            <SessionProvider>
+              <AuthLayout>
+                <main className="w-full h-full min-h-screen px-2 tablet:px-4 laptop:px-40 max-w-[1600px] mx-auto">
+                  {children}
+                </main>
+              </AuthLayout>
+            </SessionProvider>
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
