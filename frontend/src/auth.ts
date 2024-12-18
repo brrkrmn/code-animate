@@ -10,20 +10,38 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     authorized: async ({ auth }) => {
       return !!auth;
     },
-    async jwt({ token, account }) {
+    async signIn({ account, user }) {
+      if (account?.access_token && user?.id) {
+        const db = (await client).db();
+        await db
+          .collection("accounts")
+          .updateOne(
+            { userId: user.id, provider: account.provider },
+            { $set: { access_token: account.access_token } },
+            { upsert: true }
+          );
+      }
+      return true;
+    },
+    async jwt({ token, account, user }) {
       if (account) {
-        token = Object.assign({}, token, {
-          access_token: account.access_token,
-        });
+        token.access_token = account.access_token;
+
+        if (user?.id && account.access_token) {
+          const db = (await client).db();
+          await db
+            .collection("accounts")
+            .updateOne(
+              { userId: user.id, provider: account.provider },
+              { $set: { access_token: account.access_token } },
+              { upsert: true }
+            );
+        }
       }
       return token;
     },
     async session({ session, token }) {
-      if (session) {
-        session = Object.assign({}, session, {
-          access_token: token.access_token,
-        });
-      }
+      session.access_token = token.access_token;
       return session;
     },
   },
