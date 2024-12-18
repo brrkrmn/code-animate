@@ -53,4 +53,12 @@ const AccountSchema = new Schema<AccountDocument>(
 
 AccountSchema.index({ provider: 1, providerAccountId: 1 }, { unique: true });
 
+AccountSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
+
 export const Account = mongoose.model("Account", AccountSchema);
