@@ -1,6 +1,6 @@
 export type Scene = {
   id: string;
-  user: string;
+  user: User;
   title: string;
   public: boolean;
   steps: Step[];
@@ -20,4 +20,14 @@ export type Editor = {
   language: string;
   theme: string;
   extensions: string;
+};
+
+export type User = {
+  id: string;
+  email: string;
+  emailVerified: null | boolean;
+  image: string;
+  name: string;
+  scenes: Scene[];
+  updatedAt: Date;
 };
