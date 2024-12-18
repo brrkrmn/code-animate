@@ -6,6 +6,24 @@ import { Button } from "@nextui-org/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 
+const mock = {
+  title: "edited scene of hotmail",
+  public: false,
+  steps: [
+    {
+      number: 1,
+      content: "first sttep",
+    },
+  ],
+  editor: {
+    background: "string",
+    radius: "string",
+    language: "string",
+    theme: "string",
+    extensions: "string",
+  },
+};
+
 const Scene = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -16,7 +34,7 @@ const Scene = () => {
     queryFn: () => sceneService.getScene(id),
   });
 
-  const mutation = useMutation({
+  const deleteMutation = useMutation({
     mutationKey: ["deleteScene"],
     mutationFn: () => {
       return sceneService.deleteScene(id);
@@ -30,6 +48,19 @@ const Scene = () => {
     },
   });
 
+  const editMutation = useMutation({
+    mutationKey: ["editScene"],
+    mutationFn: () => {
+      return sceneService.editScene(id, mock);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["scene"] });
+    },
+    onError: (error) => {
+      console.log("Error: ", error.message);
+    },
+  });
+
   if (isPending) return <Loading />;
   if (isError) return <div>Error: {error.message}</div>;
 
@@ -37,7 +68,8 @@ const Scene = () => {
     <div>
       <div>User: {data.user.name}</div>
       <div>Title: {data.title}</div>
-      <Button onPress={() => mutation.mutate()}>DELETE THIS SCENE</Button>
+      <Button onPress={() => editMutation.mutate()}>EDIT THIS SCENE</Button>
+      <Button onPress={() => deleteMutation.mutate()}>DELETE THIS SCENE</Button>
     </div>
   );
 };
