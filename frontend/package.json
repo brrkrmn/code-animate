@@ -21,6 +21,7 @@
     "next": "15.1.0",
     "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
+    "react-best-gradient-color-picker": "^3.0.11",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0"
   },

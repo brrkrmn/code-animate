@@ -1,5 +1,6 @@
 "use client";
 
+import BackgroundPicker from "@/components/BackgroundPicker/BackgroundPicker";
 import LanguageSelector from "@/components/LanguageSelector/LanguageSelector";
 import RadiusSelector from "@/components/RadiusSelector/RadiusSelector";
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector";
@@ -19,6 +20,7 @@ const Scene = () => {
         <ThemeSelector />
         <LanguageSelector />
         <RadiusSelector />
+        <BackgroundPicker />
       </div>
       <div>
         <CodeMirror
