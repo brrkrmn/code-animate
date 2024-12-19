@@ -12,6 +12,7 @@
     "@auth/mongodb-adapter": "^3.7.4",
     "@nextui-org/react": "^2.6.8",
     "@tanstack/react-query": "^5.62.7",
+    "@uiw/codemirror-extensions-langs": "^4.23.7",
     "@uiw/codemirror-themes-all": "^4.23.7",
     "@uiw/react-codemirror": "^4.23.7",
     "axios": "^1.7.9",
