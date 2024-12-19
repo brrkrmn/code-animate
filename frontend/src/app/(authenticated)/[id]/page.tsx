@@ -1,43 +1,31 @@
 "use client";
 
-import { useDeleteScene, useEditScene, useGetScene } from "@/hooks/useScene";
-import { Button } from "@nextui-org/react";
-import { usePathname } from "next/navigation";
-
-const mock = {
-  title: "edited scene of hotmail",
-  public: false,
-  steps: [
-    {
-      number: 1,
-      content: "first sttep",
-    },
-  ],
-  editor: {
-    background: "string",
-    radius: "string",
-    language: "string",
-    theme: "string",
-    extensions: "string",
-  },
-};
+import CodeMirror from "@uiw/react-codemirror";
+import { useCallback, useState } from "react";
 
 const Scene = () => {
-  const id = usePathname();
-  const { data: scene } = useGetScene(id);
-  const deleteSceneMutation = useDeleteScene(id);
-  const editSceneMutation = useEditScene(id, mock);
+  const [value, setValue] = useState<string>();
+
+  const onChange = useCallback((val: string) => {
+    setValue(val);
+  }, []);
 
   return (
     <div>
-      <div>User: {scene?.user.name}</div>
-      <div>Title: {scene?.title}</div>
-      <Button onPress={() => editSceneMutation.mutate()}>
-        EDIT THIS SCENE
-      </Button>
-      <Button onPress={() => deleteSceneMutation.mutate()}>
-        DELETE THIS SCENE
-      </Button>
+      <div className="flex items-center justify-center gap-4"></div>
+      <div>
+        <CodeMirror
+          minHeight="200px"
+          className="w-full h-full"
+          value={value}
+          onChange={onChange}
+          autoFocus={true}
+          basicSetup={{
+            lineNumbers: false,
+            foldGutter: false,
+          }}
+        />
+      </div>
     </div>
   );
 };
