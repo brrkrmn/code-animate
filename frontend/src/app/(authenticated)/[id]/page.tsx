@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeSelector from "@/components/ThemeSelector/ThemeSelector";
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
 
@@ -12,7 +13,9 @@ const Scene = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center gap-4"></div>
+      <div className="flex items-center justify-center gap-4">
+        <ThemeSelector />
+      </div>
       <div>
         <CodeMirror
           minHeight="200px"
