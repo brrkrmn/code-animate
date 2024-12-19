@@ -1,6 +1,7 @@
 "use client";
 
 import LanguageSelector from "@/components/LanguageSelector/LanguageSelector";
+import RadiusSelector from "@/components/RadiusSelector/RadiusSelector";
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector";
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
@@ -17,6 +18,7 @@ const Scene = () => {
       <div className="flex items-center justify-center gap-4">
         <ThemeSelector />
         <LanguageSelector />
+        <RadiusSelector />
       </div>
       <div>
         <CodeMirror
