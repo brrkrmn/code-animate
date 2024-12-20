@@ -34,7 +34,7 @@ export type Scene = {
 };
 
 export type Step = {
-  number: number;
+  id: string;
   content: string;
 };
 
@@ -43,5 +43,4 @@ export type Editor = {
   radius: string;
   language: string;
   theme: string;
-  extensions: string;
 };
