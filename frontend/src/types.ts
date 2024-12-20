@@ -1,26 +1,4 @@
-export type Scene = {
-  id: string;
-  user: User;
-  title: string;
-  public: boolean;
-  steps: Step[];
-  createdAt: Date;
-  updatedAt: Date;
-  editor: Editor;
-};
-
-export type Step = {
-  number: number;
-  content: string;
-};
-
-export type Editor = {
-  background: string;
-  radius: string;
-  language: string;
-  theme: string;
-  extensions: string;
-};
+import { Scene } from "./services/scene/scene.types";
 
 export type User = {
   id: string;

@@ -22,14 +22,16 @@ export const useGetScene = (id: string) => {
 
 export const useCreateScene = (data: CreateSceneRequest) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   return useMutation({
     mutationKey: ["createScene", data],
     mutationFn: () => {
       return sceneService.createScene(data);
     },
-    onSuccess: () => {
+    onSuccess: (scene) => {
       queryClient.invalidateQueries({ queryKey: ["scenes"] });
+      router.push(`/${scene.id}`);
     },
   });
 };
