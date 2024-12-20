@@ -11,10 +11,11 @@ import { useCallback, useState } from "react";
 
 const Scene = () => {
   const [value, setValue] = useState<string>();
-  const { isDirty, saveChanges } = useSceneContext();
+  const { isDirty, saveChanges, updateScene } = useSceneContext();
 
   const onChange = useCallback((val: string) => {
     setValue(val);
+    updateScene({ title: val });
   }, []);
 
   return (

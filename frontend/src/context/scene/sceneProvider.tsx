@@ -35,6 +35,10 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
     setIsDirty(refScene !== changedScene);
   }, [changedScene]);
 
+  const updateScene = (scene: Partial<Scene>) => {
+    setChangedScene((prev) => ({ ...prev, ...scene } as Scene));
+  };
+
   const saveChanges = () => {
     editMutation.mutate();
   };
@@ -44,6 +48,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         isDirty,
         saveChanges,
+        updateScene,
       }}
     >
       {children}
