@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetScene } from "@/hooks/useScene";
+import { useEditScene, useGetScene } from "@/hooks/useScene";
 import { Scene } from "@/services/scene/scene.types";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -18,27 +18,32 @@ export const useSceneContext = () => {
 
 const SceneProvider = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const { data } = useGetScene(pathname);
+  const { data: scene } = useGetScene(pathname.split("/")[1]);
   const [refScene, setRefScene] = useState<Scene>();
-  const [newScene, setNewScene] = useState<Scene>();
+  const [changedScene, setChangedScene] = useState<Scene>();
   const [isDirty, setIsDirty] = useState(false);
+  const editMutation = useEditScene(refScene?.id || "", changedScene!);
 
   useEffect(() => {
-    if (data) {
-      setRefScene(data);
-      setNewScene(data);
+    if (scene) {
+      setRefScene(scene);
+      setChangedScene(scene);
     }
-  }, []);
+  }, [scene]);
 
   useEffect(() => {
-    setIsDirty(refScene !== newScene);
-  }, [newScene]);
+    setIsDirty(refScene !== changedScene);
+  }, [changedScene]);
+
+  const saveChanges = () => {
+    editMutation.mutate();
+  };
 
   return (
     <SceneContext.Provider
       value={{
         isDirty,
-        setNewScene,
+        saveChanges,
       }}
     >
       {children}

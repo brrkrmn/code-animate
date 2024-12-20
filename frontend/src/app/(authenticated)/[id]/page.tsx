@@ -4,11 +4,14 @@ import BackgroundPicker from "@/components/BackgroundPicker/BackgroundPicker";
 import LanguageSelector from "@/components/LanguageSelector/LanguageSelector";
 import RadiusSelector from "@/components/RadiusSelector/RadiusSelector";
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector";
+import { useSceneContext } from "@/context/scene";
+import { Button } from "@nextui-org/react";
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
 
 const Scene = () => {
   const [value, setValue] = useState<string>();
+  const { isDirty, saveChanges } = useSceneContext();
 
   const onChange = useCallback((val: string) => {
     setValue(val);
@@ -35,6 +38,7 @@ const Scene = () => {
           }}
         />
       </div>
+      {isDirty && <Button onPress={saveChanges}>Save Changes</Button>}
     </div>
   );
 };
