@@ -25,8 +25,8 @@ export type SceneDocument = Document & {
 };
 
 const StepSchema = new Schema<StepDocument>({
-  number: {
-    type: Number,
+  id: {
+    type: String,
   },
   content: {
     type: String,
@@ -38,7 +38,6 @@ const EditorSchema = new Schema({
   radius: { type: String },
   language: { type: String },
   theme: { type: String },
-  extensions: { type: String },
 });
 
 const SceneSchema = new Schema<SceneDocument>(
