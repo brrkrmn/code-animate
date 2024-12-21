@@ -20,7 +20,7 @@ const defaultScene = {
   ],
   background:
     "linear-gradient(45deg, rgba(182,1,255,1) 0%, RGB(65, 31, 161) 49%, rgba(1,1,255,1) 100%)",
-  radius: "string",
+  radius: "10",
   language: "javascript",
   theme: "androidstudio",
 };

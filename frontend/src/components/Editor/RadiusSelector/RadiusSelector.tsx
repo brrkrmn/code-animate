@@ -1,14 +1,14 @@
+import { useSceneContext } from "@/context/scene";
 import { Radio, RadioGroup } from "@nextui-org/react";
-import { useState } from "react";
 import { radiusList } from "./constants";
 
 const RadiusSelector = () => {
-  const [radius, setRadius] = useState("10");
+  const { changedScene, updateScene } = useSceneContext();
 
   return (
     <RadioGroup
-      value={radius}
-      onValueChange={setRadius}
+      value={changedScene?.radius}
+      onValueChange={(val) => updateScene({ radius: val })}
       size="lg"
       label="Radius"
       orientation="horizontal"
