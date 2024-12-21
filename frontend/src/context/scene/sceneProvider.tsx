@@ -21,7 +21,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
   const id: string = pathname.split("/")[1];
   const { data: scene } = useGetScene(id);
   const [refScene, setRefScene] = useState<Scene>();
-  const [changedScene, setChangedScene] = useState<Scene>();
+  const [changedScene, setChangedScene] = useState<Scene | undefined>();
   const [isDirty, setIsDirty] = useState(false);
   const editMutation = useEditScene(id || "", changedScene!);
   const deleteMutation = useDeleteScene(id);
@@ -53,6 +53,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
     <SceneContext.Provider
       value={{
         isDirty,
+        changedScene,
         saveChanges,
         updateScene,
         deleteScene,
