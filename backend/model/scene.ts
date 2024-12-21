@@ -6,14 +6,6 @@ export type StepDocument = Document & {
   content: string;
 };
 
-export type EditorDocument = Document & {
-  background: string;
-  radius: string;
-  language: string;
-  theme: string;
-  extensions: string;
-};
-
 export type SceneDocument = Document & {
   user: AccountDocument;
   title: string;
@@ -21,7 +13,11 @@ export type SceneDocument = Document & {
   steps: StepDocument[];
   createdAt: Date;
   updatedAt: Date;
-  editor: EditorDocument;
+  background: string;
+  radius: string;
+  language: string;
+  theme: string;
+  extensions: string;
 };
 
 const StepSchema = new Schema<StepDocument>({
@@ -31,13 +27,6 @@ const StepSchema = new Schema<StepDocument>({
   content: {
     type: String,
   },
-});
-
-const EditorSchema = new Schema({
-  background: { type: String },
-  radius: { type: String },
-  language: { type: String },
-  theme: { type: String },
 });
 
 const SceneSchema = new Schema<SceneDocument>(
@@ -57,9 +46,10 @@ const SceneSchema = new Schema<SceneDocument>(
     steps: {
       type: [StepSchema],
     },
-    editor: {
-      type: EditorSchema,
-    },
+    background: { type: String },
+    radius: { type: String },
+    language: { type: String },
+    theme: { type: String },
   },
   {
     timestamps: true,

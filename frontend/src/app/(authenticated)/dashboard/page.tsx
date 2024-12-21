@@ -18,12 +18,10 @@ const defaultScene = {
       content: "first sttep",
     },
   ],
-  editor: {
-    background: "string",
-    radius: "string",
-    language: "string",
-    theme: "string",
-  },
+  background: "string",
+  radius: "string",
+  language: "string",
+  theme: "string",
 };
 
 const Dashboard = () => {

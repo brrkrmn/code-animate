@@ -1,3 +1,5 @@
+import { Language } from "@/components/Editor/LanguageSelector";
+import { Theme } from "@/components/Editor/ThemeSelector";
 import { User } from "@/types";
 
 export type GetUserScenesResponse = Scene[];
@@ -8,7 +10,6 @@ export type CreateSceneRequest = {
   title: string;
   public: boolean;
   steps: Step[];
-  editor: Editor;
 };
 
 export type CreateSceneResponse = Scene;
@@ -19,7 +20,6 @@ export type EditSceneRequest = {
   title: string;
   public: boolean;
   steps: Step[];
-  editor: Editor;
 };
 
 export type Scene = {
@@ -30,17 +30,13 @@ export type Scene = {
   steps: Step[];
   createdAt: Date;
   updatedAt: Date;
-  editor: Editor;
+  background: string;
+  radius: string;
+  language: Language;
+  theme: Theme;
 };
 
 export type Step = {
   id: string;
   content: string;
-};
-
-export type Editor = {
-  background: string;
-  radius: string;
-  language: string;
-  theme: string;
 };
