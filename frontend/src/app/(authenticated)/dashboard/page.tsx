@@ -18,7 +18,8 @@ const defaultScene = {
       content: "first sttep",
     },
   ],
-  background: "string",
+  background:
+    "linear-gradient(45deg, rgba(182,1,255,1) 0%, RGB(65, 31, 161) 49%, rgba(1,1,255,1) 100%)",
   radius: "string",
   language: "javascript",
   theme: "androidstudio",

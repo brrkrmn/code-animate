@@ -1,11 +1,9 @@
+import { useSceneContext } from "@/context/scene";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
-import { useState } from "react";
 import ReactColorPicker from "react-best-gradient-color-picker";
 
 const BackgroundPicker = () => {
-  const [background, setBackground] = useState(
-    "linear-gradient(45deg, rgba(182,1,255,1) 0%, RGB(65, 31, 161) 49%, rgba(1,1,255,1) 100%)"
-  );
+  const { changedScene, updateScene } = useSceneContext();
 
   return (
     <Popover
@@ -21,12 +19,15 @@ const BackgroundPicker = () => {
           <p className="line-clamp-1">Background Color</p>
           <span
             className="h-8 w-8 rounded-lg shrink-0"
-            style={{ background: background }}
+            style={{ background: changedScene?.background }}
           ></span>
         </button>
       </PopoverTrigger>
       <PopoverContent>
-        <ReactColorPicker value={background} onChange={setBackground} />
+        <ReactColorPicker
+          value={changedScene?.background}
+          onChange={(val) => updateScene({ background: val })}
+        />
       </PopoverContent>
     </Popover>
   );
