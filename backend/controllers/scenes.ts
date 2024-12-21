@@ -37,7 +37,10 @@ scenesRouter.post("/", async (req: Request, res: Response) => {
     title: body.title,
     public: body.public,
     steps: body.steps,
-    editor: body.editor,
+    theme: body.theme,
+    language: body.language,
+    background: body.background,
+    radius: body.radius,
     user: user.id,
   });
 
@@ -69,7 +72,10 @@ scenesRouter.put("/:id", async (req: Request, res: Response) => {
     title: body.title,
     public: body.public,
     steps: body.steps,
-    editor: body.editor,
+    theme: body.theme,
+    language: body.language,
+    background: body.background,
+    radius: body.radius,
     user: user.id,
   };
 

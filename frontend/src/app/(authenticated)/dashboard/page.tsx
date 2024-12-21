@@ -21,7 +21,7 @@ const defaultScene = {
   background: "string",
   radius: "string",
   language: "string",
-  theme: "string",
+  theme: "androidstudio",
 };
 
 const Dashboard = () => {
