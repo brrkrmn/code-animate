@@ -1,11 +1,11 @@
+import { useSceneContext } from "@/context/scene";
 import { Select, SelectItem } from "@nextui-org/react";
 import { langs } from "@uiw/codemirror-extensions-langs";
-import { useState } from "react";
 
 export type Language = keyof typeof langs;
 
 const LanguageSelector = () => {
-  const [language, setLanguage] = useState<Language>();
+  const { changedScene, updateScene } = useSceneContext();
 
   return (
     <Select
@@ -13,8 +13,8 @@ const LanguageSelector = () => {
       fullWidth={false}
       size="sm"
       label="Language"
-      value={language}
-      onChange={(e) => setLanguage(e.target.value as Language)}
+      value={changedScene?.language}
+      onChange={(e) => updateScene({ language: e.target.value as Language })}
     >
       {Object.keys(langs)
         .sort()

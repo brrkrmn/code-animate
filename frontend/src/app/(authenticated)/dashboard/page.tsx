@@ -20,7 +20,7 @@ const defaultScene = {
   ],
   background: "string",
   radius: "string",
-  language: "string",
+  language: "javascript",
   theme: "androidstudio",
 };
 
