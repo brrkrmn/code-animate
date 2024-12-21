@@ -11,7 +11,7 @@ import { useCallback, useState } from "react";
 
 const Scene = () => {
   const [value, setValue] = useState<string>();
-  const { isDirty, saveChanges, updateScene } = useSceneContext();
+  const { isDirty, saveChanges, updateScene, deleteScene } = useSceneContext();
 
   const onChange = useCallback((val: string) => {
     setValue(val);
@@ -40,6 +40,7 @@ const Scene = () => {
         />
       </div>
       {isDirty && <Button onPress={saveChanges}>Save Changes</Button>}
+      <Button onPress={deleteScene}>Delete Scene</Button>
     </div>
   );
 };
