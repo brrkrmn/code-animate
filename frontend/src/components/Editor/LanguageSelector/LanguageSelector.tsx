@@ -13,7 +13,11 @@ const LanguageSelector = () => {
       fullWidth={false}
       size="sm"
       label="Language"
-      value={changedScene?.language}
+      selectedKeys={
+        changedScene?.language
+          ? ([changedScene.language] as Iterable<string>)
+          : []
+      }
       onChange={(e) => updateScene({ language: e.target.value as Language })}
     >
       {Object.keys(langs)

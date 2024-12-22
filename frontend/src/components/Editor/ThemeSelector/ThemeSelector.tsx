@@ -19,20 +19,22 @@ const ThemeSelector = () => {
         !item.toLowerCase().includes("style")
     );
 
-  return (
-    <Select
-      fullWidth={false}
-      disallowEmptySelection={true}
-      size="sm"
-      label="Theme"
-      value={changedScene?.theme as string}
-      onChange={(e) => updateScene({ theme: e.target.value as Theme })}
-    >
-      {themeOptions.map((item) => {
-        return <SelectItem key={item} value={item} title={item} />;
-      })}
-    </Select>
-  );
+    return (
+      <Select
+        fullWidth={false}
+        disallowEmptySelection={true}
+        size="sm"
+        label="Theme"
+        onChange={(e) => updateScene({ theme: e.target.value as Theme })}
+        selectedKeys={
+          changedScene?.theme ? ([changedScene.theme] as Iterable<string>) : []
+        }
+      >
+        {themeOptions.map((item) => {
+          return <SelectItem key={item} value={item} title={item} />;
+        })}
+      </Select>
+    );
 };
 
 export default ThemeSelector;
