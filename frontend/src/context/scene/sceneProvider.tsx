@@ -2,8 +2,11 @@
 
 import { useDeleteScene, useEditScene, useGetScene } from "@/hooks/useScene";
 import { Scene } from "@/services/scene/scene.types";
+import { Extension } from "@codemirror/state";
+import { langs } from "@uiw/codemirror-extensions-langs";
+import { EditorView } from "@uiw/react-codemirror";
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { SceneContextValue } from "./sceneProvider.types";
 
 export const SceneContext = createContext<SceneContextValue>(null);
@@ -37,6 +40,25 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
     setIsDirty(refScene !== changedScene);
   }, [changedScene]);
 
+  const themeExt = EditorView.theme({
+    "&.cm-editor": {
+      outline: "none",
+      borderRadius: `${changedScene?.radius}px`,
+    },
+    ".cm-scroller": {
+      borderRadius: `${changedScene?.radius}px`,
+      padding: "20px 20px",
+    },
+    ".cm-line": {
+      borderRadius: `${changedScene?.radius}px`,
+    },
+  });
+
+  const extensions: Extension[] = useMemo(() => {
+    const language = changedScene?.language;
+    return [langs[language ? language : "javascript"](), themeExt];
+  }, [changedScene?.language, changedScene?.radius]);
+
   const updateScene = (scene: Partial<Scene>) => {
     setChangedScene((prev) => ({ ...prev, ...scene } as Scene));
   };
@@ -57,6 +79,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
         saveChanges,
         updateScene,
         deleteScene,
+        extensions,
       }}
     >
       {children}

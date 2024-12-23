@@ -1,4 +1,5 @@
 import { Scene } from "@/services/scene/scene.types";
+import { ReactCodeMirrorProps } from "@uiw/react-codemirror";
 
 export type SceneContextValue = null | {
   isDirty: boolean;
@@ -6,4 +7,7 @@ export type SceneContextValue = null | {
   saveChanges: () => void;
   updateScene: (value: Partial<Scene>) => void;
   deleteScene: () => void;
+  extensions: Extensions;
 };
+
+export type Extensions = ReactCodeMirrorProps["extensions"];

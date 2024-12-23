@@ -15,8 +15,14 @@ import { useCallback } from "react";
 
 const Scene = () => {
   const currentStep = 0;
-  const { isDirty, saveChanges, updateScene, deleteScene, changedScene } =
-    useSceneContext();
+  const {
+    isDirty,
+    saveChanges,
+    extensions,
+    updateScene,
+    deleteScene,
+    changedScene,
+  } = useSceneContext();
 
   const onChange = useCallback(
     (val: string) => {
@@ -45,6 +51,7 @@ const Scene = () => {
           value={changedScene?.steps[currentStep].content}
           onChange={onChange}
           theme={themes[changedScene?.theme as keyof typeof themes] as Theme}
+          extensions={extensions}
           autoFocus={true}
           basicSetup={{
             lineNumbers: false,
