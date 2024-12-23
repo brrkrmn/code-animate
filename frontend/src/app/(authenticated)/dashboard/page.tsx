@@ -7,6 +7,7 @@ import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 
 const id = uuidv4();
+const stepId = uuidv4();
 
 const defaultScene = {
   id: id,
@@ -14,8 +15,8 @@ const defaultScene = {
   public: false,
   steps: [
     {
-      id: "1",
-      content: "first sttep",
+      id: stepId,
+      content: "First step",
     },
   ],
   background:

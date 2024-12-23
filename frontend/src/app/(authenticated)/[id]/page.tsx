@@ -8,16 +8,23 @@ import TitleInput from "@/components/Editor/TitleInput/TitleInput";
 import { useSceneContext } from "@/context/scene";
 import { Button } from "@nextui-org/react";
 import CodeMirror from "@uiw/react-codemirror";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 const Scene = () => {
-  const [value, setValue] = useState<string>();
-  const { isDirty, saveChanges, updateScene, deleteScene } = useSceneContext();
+  const currentStep = 0;
+  const { isDirty, saveChanges, updateScene, deleteScene, changedScene } =
+    useSceneContext();
 
-  const onChange = useCallback((val: string) => {
-    setValue(val);
-    updateScene({ title: val });
-  }, []);
+  const onChange = useCallback(
+    (val: string) => {
+      updateScene({
+        steps: (changedScene?.steps || []).map((step, index) =>
+          step && index === currentStep ? { ...step, content: val } : step
+        ),
+      });
+    },
+    [changedScene, currentStep]
+  );
 
   return (
     <div>
@@ -32,7 +39,7 @@ const Scene = () => {
         <CodeMirror
           minHeight="200px"
           className="w-full h-full"
-          value={value}
+          value={changedScene?.steps[currentStep].content}
           onChange={onChange}
           autoFocus={true}
           basicSetup={{

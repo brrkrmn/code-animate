@@ -45,6 +45,7 @@ const SceneSchema = new Schema<SceneDocument>(
     },
     steps: {
       type: [StepSchema],
+      _id: false,
     },
     background: { type: String },
     radius: { type: String },
