@@ -8,13 +8,15 @@ import ThemeSelector, {
 } from "@/components/Editor/ThemeSelector/ThemeSelector";
 import TitleInput from "@/components/Editor/TitleInput/TitleInput";
 import { useSceneContext } from "@/context/scene";
+import { Step } from "@/services/scene/scene.types";
 import { Button } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Scene = () => {
-  const currentStep = 0;
+  const [currentStep, setCurrentStep] = useState(0);
   const {
     isDirty,
     saveChanges,
@@ -35,6 +37,19 @@ const Scene = () => {
     [changedScene, currentStep]
   );
 
+  const createStep = () => {
+    const id = uuidv4();
+    updateScene({
+      steps: [
+        ...(changedScene?.steps || []),
+        {
+          id,
+          content: changedScene?.steps?.[currentStep]?.content || "",
+        } as Step,
+      ],
+    });
+  };
+
   return (
     <div>
       <TitleInput />
@@ -44,6 +59,13 @@ const Scene = () => {
         <RadiusSelector />
         <BackgroundPicker />
       </div>
+      <div>Current Step {currentStep}</div>
+      <Button onPress={createStep}>Create Step ++++</Button>
+      {changedScene?.steps.map((step, index) => (
+        <Button onPress={() => setCurrentStep(index)} key={step.id}>
+          Step: {index}
+        </Button>
+      ))}
       <div>
         <CodeMirror
           minHeight="200px"
