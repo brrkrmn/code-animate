@@ -3,10 +3,13 @@
 import BackgroundPicker from "@/components/Editor/BackgroundPicker/BackgroundPicker";
 import LanguageSelector from "@/components/Editor/LanguageSelector/LanguageSelector";
 import RadiusSelector from "@/components/Editor/RadiusSelector/RadiusSelector";
-import ThemeSelector from "@/components/Editor/ThemeSelector/ThemeSelector";
+import ThemeSelector, {
+  Theme,
+} from "@/components/Editor/ThemeSelector/ThemeSelector";
 import TitleInput from "@/components/Editor/TitleInput/TitleInput";
 import { useSceneContext } from "@/context/scene";
 import { Button } from "@nextui-org/react";
+import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback } from "react";
 
@@ -41,6 +44,7 @@ const Scene = () => {
           className="w-full h-full"
           value={changedScene?.steps[currentStep].content}
           onChange={onChange}
+          theme={themes[changedScene?.theme as keyof typeof themes] as Theme}
           autoFocus={true}
           basicSetup={{
             lineNumbers: false,
