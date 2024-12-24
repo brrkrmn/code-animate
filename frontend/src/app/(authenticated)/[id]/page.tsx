@@ -50,6 +50,12 @@ const Scene = () => {
     });
   };
 
+  const deleteStep = () => {
+    updateScene({
+      steps: changedScene?.steps.filter((step, index) => index !== currentStep),
+    });
+  };
+
   return (
     <div>
       <TitleInput />
@@ -83,6 +89,9 @@ const Scene = () => {
       </div>
       {isDirty && <Button onPress={saveChanges}>Save Changes</Button>}
       <Button onPress={deleteScene}>Delete Scene</Button>
+      {changedScene?.steps && changedScene.steps.length > 1 && (
+        <Button onPress={deleteStep}>Delete Step</Button>
+      )}
     </div>
   );
 };
