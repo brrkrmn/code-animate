@@ -28,6 +28,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDirty, setIsDirty] = useState(false);
   const editMutation = useEditScene(id || "", changedScene!);
   const deleteMutation = useDeleteScene(id);
+  const [currentStepNumber, setCurrentStepNumber] = useState(0);
 
   useEffect(() => {
     if (scene) {
@@ -80,6 +81,8 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
         updateScene,
         deleteScene,
         extensions,
+        currentStepNumber,
+        setCurrentStepNumber,
       }}
     >
       {children}

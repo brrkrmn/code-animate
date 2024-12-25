@@ -8,6 +8,8 @@ export type SceneContextValue = null | {
   updateScene: (value: Partial<Scene>) => void;
   deleteScene: () => void;
   extensions: Extensions;
+  currentStepNumber: number;
+  setCurrentStepNumber: (value: number) => void;
 };
 
 export type Extensions = ReactCodeMirrorProps["extensions"];
