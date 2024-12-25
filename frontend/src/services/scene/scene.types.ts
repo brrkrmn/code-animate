@@ -1,5 +1,5 @@
-import { Language } from "@/components/Editor/LanguageSelector";
-import { Theme } from "@/components/Editor/ThemeSelector";
+import { Language } from "@/components/Toolbar/components/LanguageSelector";
+import { Theme } from "@/components/Toolbar/components/ThemeSelector";
 import { User } from "@/types";
 
 export type GetUserScenesResponse = Scene[];

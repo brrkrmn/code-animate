@@ -1,13 +1,9 @@
 "use client";
 
-import BackgroundPicker from "@/components/Editor/BackgroundPicker/BackgroundPicker";
-import LanguageSelector from "@/components/Editor/LanguageSelector/LanguageSelector";
-import RadiusSelector from "@/components/Editor/RadiusSelector/RadiusSelector";
-import ThemeSelector, {
-  Theme,
-} from "@/components/Editor/ThemeSelector/ThemeSelector";
-import TitleInput from "@/components/Editor/TitleInput/TitleInput";
 import Steps from "@/components/Steps/Steps";
+import { Theme } from "@/components/Toolbar/components/ThemeSelector/ThemeSelector";
+import TitleInput from "@/components/Toolbar/components/TitleInput/TitleInput";
+import Toolbar from "@/components/Toolbar/Toolbar";
 import { useSceneContext } from "@/context/scene";
 import { Button } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
@@ -39,12 +35,7 @@ const Scene = () => {
   return (
     <div>
       <TitleInput />
-      <div className="flex items-center justify-center gap-4">
-        <ThemeSelector />
-        <LanguageSelector />
-        <RadiusSelector />
-        <BackgroundPicker />
-      </div>
+      <Toolbar />
       <div>
         <CodeMirror
           minHeight="200px"
