@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.4",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
     "@nextui-org/react": "^2.6.8",
     "@tanstack/react-query": "^5.62.7",
     "@uiw/codemirror-extensions-langs": "^4.23.7",

@@ -9,11 +9,60 @@ import ThemeSelector, {
 import TitleInput from "@/components/Editor/TitleInput/TitleInput";
 import { useSceneContext } from "@/context/scene";
 import { Step } from "@/services/scene/scene.types";
+import {
+  DndContext,
+  DragEndEvent,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Button } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+
+type SortableStepProps = {
+  step: Step;
+  index: number;
+  setCurrentStep: (index: number) => void;
+  isActive: boolean;
+};
+
+const SortableStep = ({
+  step,
+  index,
+  setCurrentStep,
+  isActive,
+}: SortableStepProps) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: step.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    padding: "8px",
+    marginBottom: "8px",
+    border: isActive ? "2px solid #0072F5" : "1px solid #ddd",
+    borderRadius: "4px",
+    cursor: "grab",
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <Button onPress={() => setCurrentStep(index)} size="sm">
+        Step {index + 1}
+      </Button>
+    </div>
+  );
+};
 
 const Scene = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -25,6 +74,7 @@ const Scene = () => {
     deleteScene,
     changedScene,
   } = useSceneContext();
+  const sensors = useSensors(useSensor(PointerSensor));
 
   const onChange = useCallback(
     (val: string) => {
@@ -56,6 +106,27 @@ const Scene = () => {
     });
   };
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      const oldIndex = changedScene?.steps.findIndex(
+        (step) => step.id === active.id
+      );
+      const newIndex = changedScene?.steps.findIndex(
+        (step) => step.id === over?.id
+      );
+
+      if (oldIndex !== undefined && newIndex !== undefined) {
+        const updatedSteps = [...(changedScene?.steps || [])];
+        const [movedStep] = updatedSteps.splice(oldIndex, 1);
+        updatedSteps.splice(newIndex, 0, movedStep);
+
+        updateScene({ steps: updatedSteps });
+      }
+    }
+  };
+
   return (
     <div>
       <TitleInput />
@@ -67,11 +138,27 @@ const Scene = () => {
       </div>
       <div>Current Step {currentStep}</div>
       <Button onPress={createStep}>Create Step ++++</Button>
-      {changedScene?.steps.map((step, index) => (
-        <Button onPress={() => setCurrentStep(index)} key={step.id}>
-          Step: {index}
-        </Button>
-      ))}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          items={(changedScene?.steps || []).map((step) => step.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          {changedScene?.steps.map((step, index) => (
+            <SortableStep
+              key={step.id}
+              step={step}
+              index={index}
+              setCurrentStep={setCurrentStep}
+              isActive={currentStep === index}
+            />
+          ))}
+        </SortableContext>
+      </DndContext>
+
       <div>
         <CodeMirror
           minHeight="200px"
