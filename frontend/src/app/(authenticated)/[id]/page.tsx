@@ -1,5 +1,6 @@
 "use client";
 
+import Preview from "@/components/Preview/Preview";
 import Steps from "@/components/Steps/Steps";
 import { Theme } from "@/components/Toolbar/components/ThemeSelector/ThemeSelector";
 import TitleInput from "@/components/Toolbar/components/TitleInput/TitleInput";
@@ -102,6 +103,7 @@ const Scene = () => {
       <Button onPress={deleteScene}>Delete Scene</Button>
       <Steps />
       <Button onPress={showPreview}>PREVIEW</Button>
+      <Preview />
     </div>
   );
 };
