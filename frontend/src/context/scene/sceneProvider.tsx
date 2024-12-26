@@ -99,7 +99,6 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
         if (!diff.added && !diff.removed) {
           pos += diff.count!;
         } else if (diff.added) {
-          console.log(diff);
           diff.value.split("").map((char, index) => {
             setTransactions((prev) => [
               ...prev,
@@ -109,6 +108,17 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
               },
             ]);
           });
+        } else if (diff.removed) {
+          for (let i = diff.value.length; i > 0; i--) {
+            setTransactions((prev) => [
+              ...prev,
+              {
+                from: pos + i - 1,
+                to: pos + i,
+                insert: "",
+              }
+            ])
+          }
         }
       });
     }
