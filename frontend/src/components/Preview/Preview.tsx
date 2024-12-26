@@ -5,12 +5,13 @@ import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { useRef, useState } from "react";
 
 const Preview = () => {
-  const { extensions, changedScene } = useSceneContext();
+  const { extensions, changedScene, setEditorRef } = useSceneContext();
   const editorRef = useRef<EditorView | null>(null);
   const [value, setValue] = useState("");
 
   const onCreate = (editorView: EditorView) => {
     editorRef.current = editorView;
+    setEditorRef(editorRef.current);
   };
 
   const onChange = (val: string) => setValue(val);
