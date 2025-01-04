@@ -43,7 +43,7 @@ const Filter = () => {
         .filter((key) => String(key).includes("theme-"))
         .map((key) => String(key).split("-")[1]);
 
-      const filteredSnippets = scenes.filter((scene) =>
+      const filteredScenes = scenes.filter((scene) =>
         langFilters.length > 0 && themeFilters.length > 0
           ? langFilters.includes(scene.language) &&
             themeFilters.includes(scene.theme as string)
@@ -51,7 +51,7 @@ const Filter = () => {
           ? langFilters.includes(scene.language)
           : themeFilters.includes(scene.theme as string)
       );
-      setFilteredScenes(filteredSnippets);
+      setFilteredScenes(filteredScenes);
     }
   }, [selectedKeys]);
 

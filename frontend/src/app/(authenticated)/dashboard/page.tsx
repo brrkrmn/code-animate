@@ -1,6 +1,7 @@
 "use client";
 
 import Filter from "@/components/Filter/Filter";
+import Sort from "@/components/Sort/Sort";
 import { useScenesContext } from "@/context/scenes";
 import { useCreateScene } from "@/hooks/useScene";
 import { Button } from "@nextui-org/react";
@@ -38,7 +39,7 @@ const Dashboard = () => {
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-start justify-start gap-6 py-6">
       <div className="flex items-center justify-center gap-2">
-        <Button>Sort</Button>
+        <Sort />
         <Filter />
         <Button onPress={onCreate}>Create Scene</Button>
       </div>
