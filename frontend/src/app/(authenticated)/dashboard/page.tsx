@@ -1,6 +1,8 @@
 "use client";
 
-import { useCreateScene, useGetScenes } from "@/hooks/useScene";
+import Filter from "@/components/Filter/Filter";
+import { useScenesContext } from "@/context/scenes";
+import { useCreateScene } from "@/hooks/useScene";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
@@ -27,7 +29,7 @@ const defaultScene = {
 
 const Dashboard = () => {
   const createMutation = useCreateScene(defaultScene);
-  const { data: scenes } = useGetScenes();
+  const { filteredScenes } = useScenesContext();
 
   const onCreate = () => {
     createMutation.mutate();
@@ -37,11 +39,11 @@ const Dashboard = () => {
     <div className="w-full h-full min-h-screen flex flex-col items-start justify-start gap-6 py-6">
       <div className="flex items-center justify-center gap-2">
         <Button>Sort</Button>
-        <Button>Filter</Button>
+        <Filter />
         <Button onPress={onCreate}>Create Scene</Button>
       </div>
       <div className="flex flex-col items-center justify-start">
-        {scenes?.map((scene) => (
+        {filteredScenes?.map((scene) => (
           <Link href={`/${scene.id}`} key={scene.id}>
             {scene.title}
           </Link>
