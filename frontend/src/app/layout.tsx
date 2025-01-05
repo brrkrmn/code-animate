@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer/Footer";
 import SceneProvider from "@/context/scene/sceneProvider";
 import ScenesProvider from "@/context/scenes/scenesProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider/ReactQueryProvider";
@@ -29,6 +30,7 @@ const RootLayout = ({
                   <SceneProvider>
                     <main className="w-full h-full min-h-screen px-2 tablet:px-4 laptop:px-40 max-w-[1600px] min-w-[320px] mx-auto">
                       {children}
+                      <Footer />
                     </main>
                   </SceneProvider>
                 </ScenesProvider>
