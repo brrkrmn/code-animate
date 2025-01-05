@@ -60,9 +60,14 @@ const Sort = () => {
   ];
 
   return (
-    <Dropdown backdrop="blur">
-      <DropdownTrigger>
-        <button>
+    <Dropdown
+      backdrop="blur"
+      classNames={{
+        content: "gradientBg gradientBorder shadow-medium",
+      }}
+    >
+      <DropdownTrigger className="outline-none">
+        <button className="flex items-center justify-center gap-2 w-fit px-5 py-1 rounded-full border-small border-divider bg-content1 text-foreground-100 hover:text-foreground-50 hover:shadow-small transition">
           <TbArrowsSort />
           <p>Sort</p>
         </button>
@@ -74,9 +79,17 @@ const Sort = () => {
         defaultSelectedKeys={["dateNew"]}
         variant="bordered"
         selectionMode="single"
+        itemClasses={{
+          base: "text-foreground border-small rounded-full data-[selected=true]:text-foreground-50 data-[selected=true]:shadow-large",
+        }}
       >
         {sortingOptions.map((section, index) => (
-          <DropdownSection key={index} showDivider title={section.title}>
+          <DropdownSection
+            classNames={{ base: "text-foreground-50" }}
+            key={index}
+            showDivider
+            title={section.title}
+          >
             {section.items.map((item) => (
               <DropdownItem key={item.key}>{item.content}</DropdownItem>
             ))}

@@ -21,6 +21,20 @@ export default {
     nextui({
       themes: {
         dark: {
+          layout: {
+            borderWidth: {
+              small: "1px",
+            },
+            hoverOpacity: 0.9,
+            boxShadow: {
+              large:
+                "inset 0 0 0 1px rgba(216,236,248,.2), inset 0 0 20px 2px rgba(168,216,245,.2), 0 0 0 0 rgba(0,0,0,.3)",
+              medium:
+                "inset 0 1px 1px 0 rgba(216,236,248,.2), inset 0 0 48px 0 rgba(168,216,245,.06), 0 16px 32px rgba(0,0,0,.3)",
+              small:
+                "inset 0 1px 1px 0 rgba(199,211,234,.12), inset 0 24px 48px 0 rgba(199,211,234,.05)",
+            },
+          },
           colors: {
             background: "#05060f",
             foreground: { DEFAULT: "#c7d3ea", 50: "#d1e4fa", 100: "#c7d3eaa3" },

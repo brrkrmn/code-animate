@@ -71,13 +71,22 @@ const Filter = () => {
   const selectedKeyCount = Array.from(selectedKeys).length;
 
   return (
-    <Dropdown backdrop="blur">
+    <Dropdown
+      backdrop="blur"
+      classNames={{
+        content: "gradientBg gradientBorder shadow-medium",
+      }}
+    >
       <Badge
         isInvisible={selectedKeyCount === 0}
         content={selectedKeyCount <= 5 ? selectedKeyCount : "+5"}
+        classNames={{
+          badge:
+            "bg-background shadow-large font-thin px-2 w-fit h-6 text-foreground",
+        }}
       >
-        <DropdownTrigger>
-          <button>
+        <DropdownTrigger className="outline-none">
+          <button className="flex items-center justify-center gap-2 w-fit px-5 py-1 rounded-full border-small border-divider bg-content1 text-foreground-100 hover:text-foreground-50 hover:shadow-small transition">
             <IoOptionsOutline />
             <p>Filter</p>
           </button>
@@ -89,9 +98,17 @@ const Filter = () => {
         onSelectionChange={setSelectedKeys}
         variant="bordered"
         selectionMode="multiple"
+        itemClasses={{
+          base: "text-foreground border-small rounded-full data-[selected=true]:text-foreground-50 data-[selected=true]:shadow-large",
+        }}
       >
         {filteringOptions.map((section, index) => (
-          <DropdownSection key={index} title={section.title} showDivider>
+          <DropdownSection
+            classNames={{ base: "text-foreground-50" }}
+            key={index}
+            title={section.title}
+            showDivider
+          >
             {section.items.map((item) => (
               <DropdownItem key={`${section.key}-${item.key}`}>
                 {item.content}
