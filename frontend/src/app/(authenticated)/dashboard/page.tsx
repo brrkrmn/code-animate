@@ -1,10 +1,10 @@
 "use client";
 
 import Filter from "@/components/Filter/Filter";
+import SceneCard from "@/components/SceneCard/SceneCard";
 import Sort from "@/components/Sort/Sort";
 import { useScenesContext } from "@/context/scenes";
 import { useCreateScene } from "@/hooks/useScene";
-import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
 import { v4 as uuidv4 } from "uuid";
 
@@ -38,7 +38,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-start justify-start gap-6 py-6">
-      <div className="flex items-center justify-center gap-2 flex-wrap">
+      <div className="w-full flex items-center justify-center laptop:justify-start gap-2 flex-wrap">
         <div className="flex items-center justify-center gap-2">
           <Sort />
           <Filter />
@@ -51,11 +51,9 @@ const Dashboard = () => {
           <p>Create Scene</p>
         </button>
       </div>
-      <div className="flex flex-col items-center justify-start">
+      <div className="flex items-center justify-center laptop:justify-start w-full gap-6 flex-wrap">
         {filteredScenes?.map((scene) => (
-          <Link href={`/${scene.id}`} key={scene.id}>
-            {scene.title}
-          </Link>
+          <SceneCard key={scene.id} scene={scene} />
         ))}
       </div>
     </div>

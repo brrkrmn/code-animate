@@ -11,7 +11,7 @@ export default {
   theme: {
     screens: {
       mobile: "425px",
-      tablet: "600px",
+      tablet: "768px",
       laptop: "1024px",
     },
   },
