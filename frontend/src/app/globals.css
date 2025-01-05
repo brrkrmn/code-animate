@@ -2,20 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.gradientBorder {
+  border: none;
+  box-shadow: inset 0 0 0 1px rgba(186,215,247,.12);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.gradientBg {
+  background: radial-gradient(31.2% 40.91% at 50% 151.14%, #bad6f714 0, rgba(186, 214, 247, 0) 100%), rgba(186, 214, 247, .06);
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.gradientText {
+  background: linear-gradient(0deg,#d8ecf8 0%,#98c0ef 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

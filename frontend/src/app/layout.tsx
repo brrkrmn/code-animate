@@ -19,7 +19,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html className="bg-black" lang="en">
+    <html lang="en" className="dark">
       <body className="antialiased">
         <ReactQueryProvider>
           <ThemeProvider>

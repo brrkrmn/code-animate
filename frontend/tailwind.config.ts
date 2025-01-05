@@ -14,13 +14,22 @@ export default {
       tablet: "600px",
       laptop: "1024px",
     },
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  defaultTheme: "dark",
+  plugins: [
+    nextui({
+      themes: {
+        dark: {
+          colors: {
+            background: "#05060f",
+            foreground: { DEFAULT: "#c7d3ea", 50: "#d1e4fa", 100: "#c7d3eaa3" },
+            divider: "#bacff71f",
+            content1: "#bad6f703",
+            content2: "#bad6f70f",
+          },
+        },
+      },
+    }),
+  ],
 } satisfies Config;

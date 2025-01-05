@@ -18,11 +18,11 @@ const Navbar = () => {
         color="default"
         radius="full"
         size="sm"
-        className="w-16"
+        className="gradientBorder gradientBg w-fit h-fit py-2 px-8"
         isIconOnly
         onPress={() => signOut()}
       >
-        <TbLogout className="text-lg " />
+        <TbLogout className="text-lg gradientText" />
       </Button>
     </div>
   );
