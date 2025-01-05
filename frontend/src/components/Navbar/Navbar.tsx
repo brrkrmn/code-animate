@@ -1,18 +1,30 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
-import { signOut } from "next-auth/react";
+import { Button, User } from "@nextui-org/react";
+import { signOut, useSession } from "next-auth/react";
+import { CiUser } from "react-icons/ci";
 import { TbLogout } from "react-icons/tb";
 
 const Navbar = () => {
+  const { data } = useSession();
+
   return (
     <div className="h-16 flex items-center justify-between">
-      <div className="flex items-center gap-4">
-        <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center">
-          C
-        </div>
-        <div className="text-xl ">Dashboard</div>
-      </div>
+      <User
+        classNames={{
+          description: "hidden mobile:flex",
+        }}
+        avatarProps={{
+          classNames: { base: "bg-content2 gradientBorder" },
+          showFallback: true,
+          fallback: (
+            <CiUser className="text-foreground-50 opacity-40 text-xl" />
+          ),
+          src: (data?.user?.image ?? undefined) as string | undefined,
+        }}
+        description={data?.user?.email}
+        name={data?.user?.name}
+      />
       <Button
         variant="bordered"
         color="default"
