@@ -18,14 +18,14 @@ const defaultScene = {
   steps: [
     {
       id: stepId,
-      content: "First step",
+      content:
+        '<button\n  onClick={onCreate}\n  className="flex items-center justify-center gap-2 w-fit px-5 py-1 rounded-full"\n>\n  <FaPlus className="w-4 h-4" />\n  <p>Create Scene</p>\n</button>',
     },
   ],
-  background:
-    "linear-gradient(45deg, rgba(182,1,255,1) 0%, RGB(65, 31, 161) 49%, rgba(1,1,255,1) 100%)",
+  background: "transparent",
   radius: "10",
-  language: "javascript",
-  theme: "androidstudio",
+  language: "jsx",
+  theme: "tokyoNight",
 };
 
 const Dashboard = () => {

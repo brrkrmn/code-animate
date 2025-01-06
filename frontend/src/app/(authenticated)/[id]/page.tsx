@@ -37,7 +37,10 @@ const Scene = () => {
     <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6">
       <TitleInput />
       <Toolbar />
-      <div>
+      <div
+        style={{ background: changedScene?.background }}
+        className="border-small rounded-xl border-divider py-10 px-2 tablet:py-24 tablet:px-16"
+      >
         <CodeMirror
           minHeight="200px"
           className="w-full h-full"
