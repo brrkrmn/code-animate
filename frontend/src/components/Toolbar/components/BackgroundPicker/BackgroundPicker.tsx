@@ -15,7 +15,7 @@ const BackgroundPicker = () => {
       }}
     >
       <PopoverTrigger>
-        <button className="flex items-center justify-center gap-4 border-small border-divider bg-content2 text-xs font-semibold h-full rounded-xl pl-4 pr-1 text-foreground-100 transition hover:shadow-small">
+        <button className="h-11 min-h-11 flex items-center justify-center gap-4 border-small border-divider bg-content1 shadow-small text-xs font-semibold rounded-xl pl-4 pr-1 text-foreground-100 transition hover:shadow-large">
           <p className="line-clamp-1">Background Color</p>
           <span
             className="h-8 w-8 rounded-lg shrink-0"

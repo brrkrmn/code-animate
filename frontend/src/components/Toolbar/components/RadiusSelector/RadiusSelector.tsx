@@ -13,9 +13,9 @@ const RadiusSelector = () => {
       label="Radius"
       orientation="horizontal"
       classNames={{
-        base: "flex-row items-center justify-between h-full px-2 shrink-0 border-small rounded-xl bg-content2 border-divider",
-        wrapper: "gap-4",
-        label: "text-foreground-100 text-xs font-semibold m-0",
+        base: "h-11 min-h-11 flex-row items-center justify-between h-full px-3 shrink-0 border-small rounded-xl bg-content1 border-divider shadow-small",
+        wrapper: "gap-5",
+        label: "text-foreground-100 text-xs font-semibold m-0 mr-1",
       }}
     >
       {radiusList.map((radius) => (
@@ -25,7 +25,7 @@ const RadiusSelector = () => {
           classNames={{
             base: "flex items-center justify-center p-0 h-10 max-w-10 w-10",
             wrapper: "border-0 hidden p-0",
-            labelWrapper: `m-0 w-8 h-8 flex flex-row items-center justify-center group-data-[hover=true]:bg-content2 transition rounded-lg *:text-2xl *:text-foreground-50 group-data-[selected=true]:shadow-medium group-data-[selected=true]:bg-content2 group-data-[hover=true]:shadow-small`,
+            labelWrapper: `m-0 w-8 h-8 flex flex-row items-center justify-center group-data-[hover=true]:bg-content2 transition rounded-lg *:text-2xl *:text-foreground-50 group-data-[selected=true]:shadow-large group-data-[selected=true]:bg-content1 group-data-[hover=true]:shadow-small`,
             control: "hidden",
           }}
         >

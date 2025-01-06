@@ -29,9 +29,29 @@ const ThemeSelector = () => {
         selectedKeys={
           changedScene?.theme ? ([changedScene.theme] as Iterable<string>) : []
         }
+        classNames={{
+          base: "min-w-32 tablet:w-40",
+          label:
+            "text-foreground-100 text-xs group-data-[filled=true]:text-foreground-100",
+          value:
+            "text-foreground-50 group-data-[has-value=true]:text-foreground opacity-80",
+          trigger:
+            "rounded-xl w-32 tablet:w-40 min-h-11 h-11 bg-transparent border-divider transition shadow-small border-small data-[hover=true]:bg-content1 data-[hover=true]:shadow-large data-[focus-visible=true]:outline-0",
+          popoverContent: "bg-background p-0",
+          listboxWrapper: "bg-content1 rounded-xl",
+        }}
       >
         {themeOptions.map((item) => {
-          return <SelectItem key={item} value={item} title={item} />;
+          return (
+            <SelectItem
+              classNames={{
+                base: "data-[selectable=true]:focus:bg-content2 data-[selectable=true]:focus:text-foreground-50 data-[selected=true]:border-small data-[selected=true]:border-divider data-[selected=true]:shadow-large",
+              }}
+              key={item}
+              value={item}
+              title={item}
+            />
+          );
         })}
       </Select>
     );
