@@ -9,6 +9,7 @@ import { Button } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const Scene = () => {
   const {
@@ -34,12 +35,12 @@ const Scene = () => {
   );
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6">
+    <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6 pb-40">
       <TitleInput />
       <Toolbar />
       <div
         style={{ background: changedScene?.background }}
-        className="border-small rounded-xl border-divider py-10 px-2 tablet:py-24 tablet:px-16"
+        className="relative border-small rounded-xl border-divider py-10 px-2 tablet:py-24 tablet:px-16"
       >
         <CodeMirror
           minHeight="200px"
@@ -54,11 +55,34 @@ const Scene = () => {
             foldGutter: false,
           }}
         />
+        <div className="flex items-center justify-end gap-4 absolute right-2 bottom-2">
+          {isDirty && (
+            <Button
+              variant="bordered"
+              className="border-small border-[#053118] text-[#095028]"
+              onPress={saveChanges}
+            >
+              Save Changes
+            </Button>
+          )}
+          <Button
+            variant="bordered"
+            className="border-small border-divider text-foreground-100"
+            onPress={showPreview}
+          >
+            PREVIEW
+          </Button>
+          <Button
+            isIconOnly
+            variant="bordered"
+            className="border-small border-[#610726] text-[#610726]"
+            onPress={deleteScene}
+          >
+            <FaRegTrashAlt />
+          </Button>
+        </div>
       </div>
-      {isDirty && <Button onPress={saveChanges}>Save Changes</Button>}
-      <Button onPress={deleteScene}>Delete Scene</Button>
       <Steps />
-      <Button onPress={showPreview}>PREVIEW</Button>
     </div>
   );
 };
