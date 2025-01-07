@@ -32,7 +32,7 @@ const Navbar = () => {
         size="sm"
         className="gradientBorder gradientBg w-fit h-fit py-2 px-8"
         isIconOnly
-        onPress={() => signOut()}
+        onPress={() => signOut({ redirectTo: "/" })}
       >
         <TbLogout className="text-lg gradientText" />
       </Button>
