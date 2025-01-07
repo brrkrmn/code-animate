@@ -24,7 +24,7 @@ const RootLayout = ({
           <ThemeProvider>
             <SessionProvider>
               <AuthLayout>
-                <main className="w-full h-full min-h-screen px-2 tablet:px-4 laptop:px-40 max-w-[1600px] min-w-[320px] mx-auto">
+                <main className="w-full h-full min-h-screen min-w-[320px] mx-auto">
                   {children}
                   <Footer />
                 </main>

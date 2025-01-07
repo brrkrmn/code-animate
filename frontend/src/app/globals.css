@@ -23,14 +23,28 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 80px;
+  font-size: 90px;
 }
 
 .index-module_type__E-SaG::after {
   display: inline-block;
   width: 10px;
-  height: 80px;
+  height: 70px;
   vertical-align: middle;
   margin-bottom: 10px;
   background: linear-gradient(0deg,#d8ecf8 0%,#98c0ef 100%);
+}
+
+.landingBg {
+  background: rgb(24,67,96);
+  background: linear-gradient(0deg, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 30%);
+}
+
+.landingBgReverse {
+  background: rgb(24,67,96);
+  background: linear-gradient(180deg, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 30%);
+}
+
+.landingEditor .cm-editor {
+  background: transparent;
 }

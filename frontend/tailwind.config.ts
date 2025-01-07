@@ -14,6 +14,23 @@ export default {
       tablet: "768px",
       laptop: "1024px",
     },
+    extend: {
+      animation: {
+        slide: "slideInFromTop 1s ease-in-out",
+      },
+      keyframes: {
+        slideInFromTop: {
+          "0%": {
+            transform: "translateY(-6%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
+      },
+    },
   },
   darkMode: "class",
   defaultTheme: "dark",
