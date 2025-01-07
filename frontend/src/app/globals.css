@@ -42,7 +42,7 @@
 
 .landingBgReverse {
   background: rgb(24,67,96);
-  background: linear-gradient(180deg, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 30%);
+  background: linear-gradient(180deg, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 70%);
 }
 
 .landingEditor .cm-editor {

@@ -14,10 +14,10 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (status === "loading") {
       setIsLoading(true);
-    } else if (status === "authenticated" && (pathname === "/auth" || pathname === "/")) {
+    } else if (status === "authenticated" && (pathname === "/")) {
       router.push("/dashboard");
     } else if (status === "unauthenticated" && pathname === "/dashboard") {
-      router.push("/auth");
+      router.push("/");
     } else {
       setIsLoading(false);
     }

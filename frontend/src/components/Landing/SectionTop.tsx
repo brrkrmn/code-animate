@@ -1,5 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
+import { signIn } from "next-auth/react";
 import { useRef } from "react";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { TypeAnimation } from "react-type-animation";
 
 const SectionTop = () => {
@@ -20,11 +23,16 @@ const SectionTop = () => {
     x: [5, -2, -5],
   };
 
+  const float3 = {
+    y: [-2, 6, -2],
+    x: [2, -5, -2],
+  };
+
   return (
     <motion.div
       ref={sectionRef}
       style={{ opacity }}
-      className="w-screen h-screen flex flex-col gap-10 items-center pt-[20%] justify-start animate-slide landingBgReverse"
+      className="w-screen h-screen flex flex-col gap-10 items-center pt-[10%] justify-start animate-slide landingBgReverse"
     >
       <TypeAnimation
         wrapper="span"
@@ -70,6 +78,7 @@ const SectionTop = () => {
           Try it out!
         </motion.button>
         <motion.button
+          onClick={() => signIn("google")}
           animate={float2}
           transition={{
             repeat: Infinity,
@@ -77,9 +86,24 @@ const SectionTop = () => {
             duration: 6,
             ease: "easeInOut",
           }}
-          className="w-40 h-10 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large"
+          className="w-fit px-6 h-10 flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large"
         >
-          Log In
+          <FcGoogle className="text-foreground-100" />
+          <p className="gradientText">Log in with Google</p>
+        </motion.button>
+        <motion.button
+          onClick={() => signIn("github")}
+          animate={float3}
+          transition={{
+            repeat: Infinity,
+            repeatType: "reverse",
+            duration: 2,
+            ease: "easeInOut",
+          }}
+          className="w-fit px-6 h-10 rounded-full flex items-center justify-center gap-2 border-small border-divider gradientText shadow-medium transition hover:shadow-large"
+        >
+          <FaGithub />
+          Log in with Github
         </motion.button>
       </motion.div>
     </motion.div>
