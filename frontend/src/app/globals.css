@@ -17,3 +17,20 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.index-module_type__E-SaG {
+  background: linear-gradient(0deg,#d8ecf8 0%,#98c0ef 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 80px;
+}
+
+.index-module_type__E-SaG::after {
+  display: inline-block;
+  width: 10px;
+  height: 80px;
+  vertical-align: middle;
+  margin-bottom: 10px;
+  background: linear-gradient(0deg,#d8ecf8 0%,#98c0ef 100%);
+}
