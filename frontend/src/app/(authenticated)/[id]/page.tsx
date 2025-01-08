@@ -5,12 +5,12 @@ import { Theme } from "@/components/Toolbar/components/ThemeSelector/ThemeSelect
 import TitleInput from "@/components/Toolbar/components/TitleInput/TitleInput";
 import Toolbar from "@/components/Toolbar/Toolbar";
 import { useSceneContext } from "@/context/scene";
-import { Button } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
 import Link from "next/link";
 import { useCallback } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt, FaSave } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa6";
 
 const Scene = () => {
   const {
@@ -36,7 +36,35 @@ const Scene = () => {
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6 pb-40">
-      <TitleInput />
+      <div className="flex flex-col tablet:flex-row items-start tablet:items-center justify-between gap-4">
+        <TitleInput />
+        <div className="flex items-center justify-end gap-4">
+          {isDirty && (
+            <button
+              className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+              onClick={saveChanges}
+            >
+              <FaSave className="text-success-200" />
+              Save
+            </button>
+          )}
+          <Link
+            href={`/${changedScene?.id}/preview`}
+            target="_blank"
+            className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+          >
+            <FaPlay className="text-default-300" />
+            Preview
+          </Link>
+          <button
+            className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+            onClick={deleteScene}
+          >
+            <FaRegTrashAlt className="text-danger-200" />
+            Delete
+          </button>
+        </div>
+      </div>
       <Toolbar />
       <div
         style={{ background: changedScene?.background }}
@@ -55,32 +83,6 @@ const Scene = () => {
             foldGutter: false,
           }}
         />
-        <div className="flex items-center justify-end gap-4 absolute right-2 bottom-2">
-          {isDirty && (
-            <Button
-              variant="bordered"
-              className="border-small border-[#053118] text-[#095028]"
-              onPress={saveChanges}
-            >
-              Save Changes
-            </Button>
-          )}
-          <Link
-            href={`/${changedScene?.id}/preview`}
-            target="_blank"
-            className="border-small border-divider text-foreground-100"
-          >
-            PREVIEW
-          </Link>
-          <Button
-            isIconOnly
-            variant="bordered"
-            className="border-small border-[#610726] text-[#610726]"
-            onPress={deleteScene}
-          >
-            <FaRegTrashAlt />
-          </Button>
-        </div>
       </div>
       <Steps />
     </div>
