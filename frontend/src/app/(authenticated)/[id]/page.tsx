@@ -35,8 +35,8 @@ const Scene = () => {
   );
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6 pb-40">
-      <div className="flex flex-col tablet:flex-row items-start tablet:items-center justify-between gap-4">
+    <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6">
+      <div className="flex flex-col tablet:flex-row items-start tablet:items-center justify-between gap-4 mb-4">
         <TitleInput />
         <div className="flex items-center justify-end gap-4">
           {isDirty && (
