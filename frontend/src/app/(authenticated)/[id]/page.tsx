@@ -8,6 +8,7 @@ import { useSceneContext } from "@/context/scene";
 import { Button } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
+import Link from "next/link";
 import { useCallback } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -20,7 +21,6 @@ const Scene = () => {
     deleteScene,
     changedScene,
     currentStepNumber,
-    showPreview,
   } = useSceneContext();
 
   const onChange = useCallback(
@@ -65,13 +65,13 @@ const Scene = () => {
               Save Changes
             </Button>
           )}
-          <Button
-            variant="bordered"
+          <Link
+            href={`/${changedScene?.id}/preview`}
+            target="_blank"
             className="border-small border-divider text-foreground-100"
-            onPress={showPreview}
           >
             PREVIEW
-          </Button>
+          </Link>
           <Button
             isIconOnly
             variant="bordered"
