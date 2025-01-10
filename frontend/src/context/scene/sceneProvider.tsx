@@ -5,7 +5,7 @@ import { Scene } from "@/services/scene/scene.types";
 import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import { EditorView } from "@uiw/react-codemirror";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { SceneContextValue } from "./sceneProvider.types";
 
@@ -20,8 +20,8 @@ export const useSceneContext = () => {
 };
 
 const SceneProvider = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
-  const id: string = pathname.split("/")[1];
+  const params = useParams();
+  const id = params.id as string;
   const { data: scene } = useGetScene(id);
   const [refScene, setRefScene] = useState<Scene>();
   const [changedScene, setChangedScene] = useState<Scene | undefined>();

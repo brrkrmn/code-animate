@@ -4,13 +4,13 @@ import { useGetScene } from "@/hooks/useScene";
 import dispatchTransactions from "@/utils/dispatchTransactions/dispatchTransactions";
 import getTransactions from "@/utils/getTransactions/getTransactions";
 import { EditorView } from "@uiw/react-codemirror";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useRef, useState } from "react";
 import PreviewEditor from "./components/PreviewEditor/PreviewEditor";
 
 const Preview = () => {
-  const pathname = usePathname();
-  const id: string = pathname.split("/")[1];
+  const params = useParams();
+  const id = params.id as string;
   const { data: scene } = useGetScene(id);
   const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer/Footer";
 import ReactQueryProvider from "@/providers/ReactQueryProvider/ReactQueryProvider";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
 import type { Metadata } from "next";
@@ -23,12 +22,7 @@ const RootLayout = ({
         <ReactQueryProvider>
           <ThemeProvider>
             <SessionProvider>
-              <AuthLayout>
-                <main className="w-full h-full min-h-screen min-w-[320px] flex flex-col items-center justify-center">
-                  {children}
-                  <Footer />
-                </main>
-              </AuthLayout>
+              <AuthLayout>{children}</AuthLayout>
             </SessionProvider>
           </ThemeProvider>
         </ReactQueryProvider>
