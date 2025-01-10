@@ -1,5 +1,5 @@
-import { Transaction } from "@/context/scene/sceneProvider.types";
 import { EditorView } from "@uiw/react-codemirror";
+import { Transaction } from "./getTransactions/getTransactions.types";
 
 const dispatchTransactions = (
   editorView: EditorView,

@@ -1,5 +1,5 @@
 import { diffChars } from "diff";
-import { Diff, Transaction } from "../context/scene/sceneProvider.types";
+import { Diff, Transaction } from "./getTransactions.types";
 
 const getTransactions = (initial: string, target: string) => {
   const transactions: Transaction[] = [];

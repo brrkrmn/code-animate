@@ -1,14 +1,13 @@
 "use client";
 
 import { useDeleteScene, useEditScene, useGetScene } from "@/hooks/useScene";
-import { Scene, Step } from "@/services/scene/scene.types";
+import { Scene } from "@/services/scene/scene.types";
 import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import { EditorView } from "@uiw/react-codemirror";
-import { diffChars } from "diff";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Diff, SceneContextValue, Transaction } from "./sceneProvider.types";
+import { SceneContextValue } from "./sceneProvider.types";
 
 export const SceneContext = createContext<SceneContextValue>(null);
 
@@ -30,8 +29,6 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
   const editMutation = useEditScene(id || "", changedScene!);
   const deleteMutation = useDeleteScene(id);
   const [currentStepNumber, setCurrentStepNumber] = useState(0);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [editorRef, setEditorRef] = useState<EditorView>();
 
   useEffect(() => {
     if (scene) {
@@ -75,85 +72,6 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
     deleteMutation.mutate();
   };
 
-  const showPreview = () => {
-    setTransactions([]);
-    createTransactions();
-    if (editorRef) {
-      resetChanges(editorRef);
-      initializeChanges(editorRef);
-      dispatchTransactions(editorRef);
-    }
-  };
-
-  const createTransactions = () => {
-    const steps = changedScene?.steps as Step[];
-    for (let i = 0; i < steps.length - 1; i++) {
-      const oldContent = steps[i].content;
-      const newContent = steps[i + 1].content;
-
-      const diffSet = diffChars(oldContent, newContent) as Diff[];
-
-      let pos = 0;
-
-      diffSet.forEach((diff) => {
-        if (!diff.added && !diff.removed) {
-          pos += diff.count!;
-        } else if (diff.added) {
-          diff.value.split("").map((char, index) => {
-            setTransactions((prev) => [
-              ...prev,
-              {
-                from: pos + index,
-                insert: char,
-              },
-            ]);
-          });
-        } else if (diff.removed) {
-          for (let i = diff.value.length; i > 0; i--) {
-            setTransactions((prev) => [
-              ...prev,
-              {
-                from: pos + i - 1,
-                to: pos + i,
-                insert: "",
-              }
-            ])
-          }
-        }
-      });
-    }
-  };
-
-  const dispatchTransactions = (editorView: EditorView) => {
-    transactions.forEach((transaction, index) => {
-      setTimeout(() => {
-        editorView.dispatch({
-          changes: {
-            from: transaction.from,
-            to: transaction.to,
-            insert: transaction.insert,
-          },
-        });
-      }, index * 100);
-    });
-  };
-
-  const initializeChanges = (editorView: EditorView) => {
-    editorView.dispatch({
-      changes: { from: 0, insert: changedScene?.steps[0].content },
-    });
-  };
-
-  const resetChanges = (editorView: EditorView) => {
-    editorView.dispatch({
-      changes: {
-        from: 0,
-        to: editorView.state.doc.toString().length,
-        insert: "",
-      },
-    });
-  };
-
   return (
     <SceneContext.Provider
       value={{
@@ -165,8 +83,6 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
         extensions,
         currentStepNumber,
         setCurrentStepNumber,
-        showPreview,
-        setEditorRef,
       }}
     >
       {children}
