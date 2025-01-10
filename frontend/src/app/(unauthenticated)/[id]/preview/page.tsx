@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetScene } from "@/hooks/useScene";
-import dispatchTransactions from "@/utils/dispatchTransactions";
+import dispatchTransactions from "@/utils/dispatchTransactions/dispatchTransactions";
 import getTransactions from "@/utils/getTransactions/getTransactions";
 import { EditorView } from "@uiw/react-codemirror";
 import { usePathname } from "next/navigation";

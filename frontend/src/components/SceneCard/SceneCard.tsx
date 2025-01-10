@@ -1,5 +1,5 @@
 import { Scene } from "@/services/scene/scene.types";
-import formatDate from "@/utils/formatDate";
+import formatDate from "@/utils/formatDate/formatDate";
 import { Chip } from "@nextui-org/react";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import { vscodeDarkInit } from "@uiw/codemirror-themes-all";

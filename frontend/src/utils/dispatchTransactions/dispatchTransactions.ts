@@ -1,5 +1,5 @@
 import { EditorView } from "@uiw/react-codemirror";
-import { Transaction } from "./getTransactions/getTransactions.types";
+import { Transaction } from "../getTransactions/getTransactions.types";
 
 const dispatchTransactions = (
   editorView: EditorView,
