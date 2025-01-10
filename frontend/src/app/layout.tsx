@@ -1,6 +1,4 @@
 import Footer from "@/components/Footer/Footer";
-import SceneProvider from "@/context/scene/sceneProvider";
-import ScenesProvider from "@/context/scenes/scenesProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider/ReactQueryProvider";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
 import type { Metadata } from "next";
@@ -26,14 +24,10 @@ const RootLayout = ({
           <ThemeProvider>
             <SessionProvider>
               <AuthLayout>
-                <ScenesProvider>
-                  <SceneProvider>
-                    <main className="w-full h-full min-h-screen min-w-[320px] flex flex-col items-center justify-center">
-                      {children}
-                      <Footer />
-                    </main>
-                  </SceneProvider>
-                </ScenesProvider>
+                <main className="w-full h-full min-h-screen min-w-[320px] flex flex-col items-center justify-center">
+                  {children}
+                  <Footer />
+                </main>
               </AuthLayout>
             </SessionProvider>
           </ThemeProvider>
