@@ -1,41 +1,75 @@
 "use client";
 
-import { Theme } from "@/components/Toolbar/components/ThemeSelector/ThemeSelector";
-import { useSceneContext } from "@/context/scene";
-import * as themes from "@uiw/codemirror-themes-all";
-import CodeMirror, { EditorView } from "@uiw/react-codemirror";
+import { useGetScene } from "@/hooks/useScene";
+import dispatchTransactions from "@/utils/dispatchTransactions";
+import getTransactions from "@/utils/getTransactions";
+import { EditorView } from "@uiw/react-codemirror";
+import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
+import PreviewEditor from "./components/PreviewEditor/PreviewEditor";
 
 const Preview = () => {
-  const { extensions, changedScene, setEditorRef } = useSceneContext();
+  const pathname = usePathname();
+  const id: string = pathname.split("/")[1];
+  const { data: scene } = useGetScene(id);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const editorRef = useRef<EditorView | null>(null);
-  const [value, setValue] = useState("");
+  const timeoutIdsRef = useRef<NodeJS.Timeout[]>([]);
 
   const onCreate = (editorView: EditorView) => {
     editorRef.current = editorView;
-    setEditorRef(editorRef.current);
   };
 
-  const onChange = (val: string) => setValue(val);
+  if (!scene) return null;
+
+  const onNextStep = () => {
+    if (!editorRef.current) return null;
+
+    timeoutIdsRef.current.forEach((id) => clearTimeout(id));
+
+    const currentContent = scene.steps[currentIndex].content;
+    const nextContent = scene.steps[currentIndex + 1].content;
+
+    const transactions = getTransactions(currentContent, nextContent);
+    const timeoutIds = dispatchTransactions(editorRef.current, transactions);
+    timeoutIdsRef.current = timeoutIds;
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const onPrevStep = () => {
+    if (!editorRef.current) return null;
+
+    timeoutIdsRef.current.forEach((id) => clearTimeout(id));
+
+    const currentContent = scene.steps[currentIndex].content;
+    const prevContent = scene.steps[currentIndex - 1].content;
+
+    const transactions = getTransactions(currentContent, prevContent);
+    const timeoutIds = dispatchTransactions(editorRef.current, transactions);
+    timeoutIdsRef.current = timeoutIds;
+    setCurrentIndex((prev) => prev - 1);
+  };
 
   return (
-    <div className="min-h-screen w-full border-2">
-      <CodeMirror
-        value={value}
-        onChange={onChange}
-        onCreateEditor={onCreate}
-        theme={themes[changedScene?.theme as keyof typeof themes] as Theme}
-        extensions={extensions}
-        autoFocus={true}
-        editable={false}
-        minHeight="200px"
-        className="w-full h-full"
-        basicSetup={{
-          lineNumbers: false,
-          highlightActiveLine: false,
-          foldGutter: false,
-        }}
+    <div className="w-screen">
+      <PreviewEditor
+        lang={scene.language}
+        radius={scene.radius}
+        theme={scene.theme}
+        onCreate={onCreate}
+        initialValue={scene.steps[0].content}
       />
+      <button onClick={onPrevStep} disabled={currentIndex === 0}>
+        Prev
+      </button>
+      <button
+        onClick={onNextStep}
+        disabled={currentIndex === scene.steps.length - 1}
+      >
+        Next
+      </button>
+      <div>{currentIndex}</div>
     </div>
   );
 };
