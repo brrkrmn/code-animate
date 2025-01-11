@@ -5,7 +5,7 @@ import dispatchTransactions from "@/utils/dispatchTransactions/dispatchTransacti
 import getTransactions from "@/utils/getTransactions/getTransactions";
 import { EditorView } from "@uiw/react-codemirror";
 import { useParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import PreviewEditor from "./components/PreviewEditor/PreviewEditor";
 
 const Preview = () => {
@@ -17,14 +17,8 @@ const Preview = () => {
   const editorRef = useRef<EditorView | null>(null);
   const timeoutIdsRef = useRef<NodeJS.Timeout[]>([]);
 
-  const onCreate = (editorView: EditorView) => {
-    editorRef.current = editorView;
-  };
-
-  if (!scene) return null;
-
-  const onNextStep = () => {
-    if (!editorRef.current) return null;
+  const onNextStep = useCallback(() => {
+    if (!editorRef.current || !scene) return null;
 
     timeoutIdsRef.current.forEach((id) => clearTimeout(id));
 
@@ -35,10 +29,10 @@ const Preview = () => {
     const timeoutIds = dispatchTransactions(editorRef.current, transactions);
     timeoutIdsRef.current = timeoutIds;
     setCurrentIndex((prev) => prev + 1);
-  };
+  }, [currentIndex, scene]);
 
-  const onPrevStep = () => {
-    if (!editorRef.current) return null;
+  const onPrevStep = useCallback(() => {
+    if (!editorRef.current || !scene) return null;
 
     timeoutIdsRef.current.forEach((id) => clearTimeout(id));
 
@@ -49,7 +43,38 @@ const Preview = () => {
     const timeoutIds = dispatchTransactions(editorRef.current, transactions);
     timeoutIdsRef.current = timeoutIds;
     setCurrentIndex((prev) => prev - 1);
+  }, [currentIndex, scene]);
+
+  useEffect(() => {
+    const handleNextKeydown = (e: KeyboardEvent) => {
+      if (
+        e.key === "ArrowRight" &&
+        !(currentIndex === scene!.steps.length - 1)
+      ) {
+        onNextStep();
+      }
+    };
+
+    const handlePrevKeydown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && !(currentIndex === 0)) {
+        onPrevStep();
+      }
+    };
+
+    document.addEventListener("keydown", handleNextKeydown);
+    document.addEventListener("keydown", handlePrevKeydown);
+
+    return () => {
+      document.removeEventListener("keydown", handleNextKeydown);
+      document.removeEventListener("keydown", handlePrevKeydown);
+    };
+  }, [onNextStep, onPrevStep]);
+
+  const onCreate = (editorView: EditorView) => {
+    editorRef.current = editorView;
   };
+
+  if (!scene) return null;
 
   return (
     <div className="w-screen">
