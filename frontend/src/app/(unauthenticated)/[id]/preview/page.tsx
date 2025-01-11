@@ -77,7 +77,10 @@ const Preview = () => {
   if (!scene) return null;
 
   return (
-    <div className="w-screen">
+    <div
+      className="w-full h-screen flex flex-col items-center justify-center px-4 tablet:px-40"
+      style={{ background: scene.background }}
+    >
       <PreviewEditor
         lang={scene.language}
         radius={scene.radius}
@@ -85,16 +88,17 @@ const Preview = () => {
         onCreate={onCreate}
         initialValue={scene.steps[0].content}
       />
-      <button onClick={onPrevStep} disabled={currentIndex === 0}>
-        Prev
-      </button>
-      <button
-        onClick={onNextStep}
-        disabled={currentIndex === scene.steps.length - 1}
-      >
-        Next
-      </button>
-      <div>{currentIndex}</div>
+      <div>
+        <button onClick={onPrevStep} disabled={currentIndex === 0}>
+          Prev
+        </button>
+        <button
+          onClick={onNextStep}
+          disabled={currentIndex === scene.steps.length - 1}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

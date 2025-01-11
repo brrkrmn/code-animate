@@ -50,8 +50,8 @@ const PreviewEditor = ({
         extensions={extensions}
         autoFocus={true}
         editable={false}
-        minHeight="200px"
-        className="w-full h-full"
+        maxHeight="90vh"
+        maxWidth="100vw"
         basicSetup={{
           lineNumbers: false,
           highlightActiveLine: false,
