@@ -6,6 +6,7 @@ import getTransactions from "@/utils/getTransactions/getTransactions";
 import { EditorView } from "@uiw/react-codemirror";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Controls from "./components/Controls/Controls";
 import PreviewEditor from "./components/PreviewEditor/PreviewEditor";
 
 const Preview = () => {
@@ -88,17 +89,12 @@ const Preview = () => {
         onCreate={onCreate}
         initialValue={scene.steps[0].content}
       />
-      <div>
-        <button onClick={onPrevStep} disabled={currentIndex === 0}>
-          Prev
-        </button>
-        <button
-          onClick={onNextStep}
-          disabled={currentIndex === scene.steps.length - 1}
-        >
-          Next
-        </button>
-      </div>
+      <Controls
+        onPrevStep={onPrevStep}
+        onNextStep={onNextStep}
+        currentIndex={currentIndex}
+        maxIndex={scene.steps.length - 1}
+      />
     </div>
   );
 };
