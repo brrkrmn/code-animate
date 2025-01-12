@@ -37,12 +37,12 @@ export const useCreateScene = (data: CreateSceneRequest) => {
   });
 };
 
-export const useEditScene = (id: string, data: EditSceneRequest) => {
+export const useEditScene = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["editScene", id, data],
-    mutationFn: () => {
+    mutationKey: ["editScene", id],
+    mutationFn: (data: EditSceneRequest) => {
       return sceneService.editScene(id, data);
     },
     onSuccess: () => {

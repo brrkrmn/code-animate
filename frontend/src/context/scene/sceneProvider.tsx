@@ -1,6 +1,5 @@
 "use client";
 
-import { useDeleteScene, useEditScene } from "@/hooks/useScene";
 import { Scene } from "@/services/scene/scene.types";
 import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
@@ -21,15 +20,17 @@ export const useSceneContext = () => {
 const SceneProvider = ({
   children,
   scene,
+  deleteScene,
+  onSave,
 }: {
   children: React.ReactNode;
   scene: Scene;
+  deleteScene: () => void;
+  onSave: (scene: Scene) => void;
 }) => {
   const [refScene, setRefScene] = useState<Scene>();
   const [changedScene, setChangedScene] = useState<Scene | undefined>();
   const [isDirty, setIsDirty] = useState(false);
-  const editMutation = useEditScene(scene.id || "", changedScene!);
-  const deleteMutation = useDeleteScene(scene.id);
   const [currentStepNumber, setCurrentStepNumber] = useState(0);
 
   useEffect(() => {
@@ -67,11 +68,8 @@ const SceneProvider = ({
   };
 
   const saveChanges = () => {
-    editMutation.mutate();
-  };
-
-  const deleteScene = () => {
-    deleteMutation.mutate();
+    if (!changedScene) return null;
+    onSave(changedScene);
   };
 
   return (
