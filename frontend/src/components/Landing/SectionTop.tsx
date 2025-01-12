@@ -1,11 +1,14 @@
+import { createDefaultScene } from "@/utils/createDefaultScene";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { TypeAnimation } from "react-type-animation";
 
 const SectionTop = () => {
+  const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -26,6 +29,12 @@ const SectionTop = () => {
   const float3 = {
     y: [-2, 6, -2],
     x: [2, -5, -2],
+  };
+
+  const onTryOut = () => {
+    const defaultScene = createDefaultScene();
+    localStorage.setItem(defaultScene.id, JSON.stringify(defaultScene));
+    router.push(`/tryout/${defaultScene.id}`);
   };
 
   return (
@@ -59,13 +68,14 @@ const SectionTop = () => {
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: "10%", opacity: 1 }}
         transition={{
-          delay: 6,
+          delay: 2,
           duration: 2,
           ease: "easeInOut",
         }}
         className="flex items-center justify-center gap-4"
       >
         <motion.button
+          onClick={onTryOut}
           transition={{
             repeat: Infinity,
             repeatType: "reverse",
