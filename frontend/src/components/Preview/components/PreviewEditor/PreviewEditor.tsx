@@ -1,4 +1,4 @@
-import { Theme } from "@/components/Toolbar/components/ThemeSelector/ThemeSelector";
+import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSelector/ThemeSelector";
 import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import * as themes from "@uiw/codemirror-themes-all";

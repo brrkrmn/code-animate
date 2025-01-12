@@ -1,5 +1,5 @@
-import { Language } from "@/components/Toolbar/components/LanguageSelector";
-import { Theme } from "@/components/Toolbar/components/ThemeSelector";
+import { Language } from "@/components/Editor/components/Toolbar/components/LanguageSelector";
+import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSelector";
 import { EditorView } from "@uiw/react-codemirror";
 
 export type PreviewEditorProps = {

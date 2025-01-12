@@ -1,8 +1,8 @@
 "use client";
 
-import Filter from "@/components/Filter/Filter";
-import SceneCard from "@/components/SceneCard/SceneCard";
-import Sort from "@/components/Sort/Sort";
+import Filter from "@/components/DashboardComponents/Filter/Filter";
+import SceneCard from "@/components/DashboardComponents/SceneCard/SceneCard";
+import Sort from "@/components/DashboardComponents/Sort/Sort";
 import { useScenesContext } from "@/context/scenes";
 import { useCreateScene } from "@/hooks/useScene";
 import { createDefaultScene } from "@/utils/createDefaultScene";

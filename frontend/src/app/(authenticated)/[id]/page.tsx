@@ -1,9 +1,9 @@
 "use client";
 
-import Steps from "@/components/Steps/Steps";
-import { Theme } from "@/components/Toolbar/components/ThemeSelector/ThemeSelector";
-import TitleInput from "@/components/Toolbar/components/TitleInput/TitleInput";
-import Toolbar from "@/components/Toolbar/Toolbar";
+import Steps from "@/components/Editor/components/Steps/Steps";
+import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSelector/ThemeSelector";
+import TitleInput from "@/components/Editor/components/Toolbar/components/TitleInput/TitleInput";
+import Toolbar from "@/components/Editor/components/Toolbar/Toolbar";
 import { useSceneContext } from "@/context/scene";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
