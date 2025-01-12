@@ -5,30 +5,14 @@ import SceneCard from "@/components/SceneCard/SceneCard";
 import Sort from "@/components/Sort/Sort";
 import { useScenesContext } from "@/context/scenes";
 import { useCreateScene } from "@/hooks/useScene";
+import { createDefaultScene } from "@/utils/createDefaultScene";
+import { useMemo } from "react";
 import { FaPlus } from "react-icons/fa6";
-import { v4 as uuidv4 } from "uuid";
-
-const id = uuidv4();
-const stepId = uuidv4();
-
-const defaultScene = {
-  id: id,
-  title: "Untitled",
-  public: false,
-  steps: [
-    {
-      id: stepId,
-      content:
-        '<button\n  onClick={onCreate}\n  className="flex items-center justify-center gap-2 w-fit px-5 py-1 rounded-full"\n>\n  <FaPlus className="w-4 h-4" />\n  <p>Create Scene</p>\n</button>',
-    },
-  ],
-  background: "transparent",
-  radius: "10",
-  language: "jsx",
-  theme: "tokyoNight",
-};
 
 const Dashboard = () => {
+  const defaultScene = useMemo(() => {
+    return createDefaultScene();
+  }, []);
   const createMutation = useCreateScene(defaultScene);
   const { filteredScenes } = useScenesContext();
 
