@@ -2,8 +2,8 @@
 
 import Editor from "@/components/Editor/Editor";
 
-const Scene = () => {
+const TryoutPage = () => {
   return <Editor />;
 };
 
-export default Scene;
+export default TryoutPage;

@@ -10,7 +10,11 @@ const TryoutLayout = ({ children }: { children: React.ReactNode }) => {
   const scene = localStorage.getItem(id);
 
   if (!scene) return null;
-  return <SceneProvider scene={JSON.parse(scene)}>{children} </SceneProvider>;
+  return (
+    <div className="px-2 tablet:px-4 laptop:px-40 w-full max-w-[1600px]">
+      <SceneProvider scene={JSON.parse(scene)}>{children} </SceneProvider>;
+    </div>
+  );
 };
 
 export default TryoutLayout;
