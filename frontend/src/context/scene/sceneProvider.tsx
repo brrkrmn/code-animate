@@ -1,11 +1,10 @@
 "use client";
 
-import { useDeleteScene, useEditScene, useGetScene } from "@/hooks/useScene";
+import { useDeleteScene, useEditScene } from "@/hooks/useScene";
 import { Scene } from "@/services/scene/scene.types";
 import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import { EditorView } from "@uiw/react-codemirror";
-import { useParams } from "next/navigation";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { SceneContextValue } from "./sceneProvider.types";
 
@@ -19,15 +18,18 @@ export const useSceneContext = () => {
   return context;
 };
 
-const SceneProvider = ({ children }: { children: React.ReactNode }) => {
-  const params = useParams();
-  const id = params.id as string;
-  const { data: scene } = useGetScene(id);
+const SceneProvider = ({
+  children,
+  scene,
+}: {
+  children: React.ReactNode;
+  scene: Scene;
+}) => {
   const [refScene, setRefScene] = useState<Scene>();
   const [changedScene, setChangedScene] = useState<Scene | undefined>();
   const [isDirty, setIsDirty] = useState(false);
-  const editMutation = useEditScene(id || "", changedScene!);
-  const deleteMutation = useDeleteScene(id);
+  const editMutation = useEditScene(scene.id || "", changedScene!);
+  const deleteMutation = useDeleteScene(scene.id);
   const [currentStepNumber, setCurrentStepNumber] = useState(0);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setIsDirty(refScene !== changedScene);
-  }, [changedScene]);
+  }, [changedScene, refScene]);
 
   const themeExt = EditorView.theme({
     "&.cm-editor": {
@@ -58,7 +60,7 @@ const SceneProvider = ({ children }: { children: React.ReactNode }) => {
   const extensions: Extension[] = useMemo(() => {
     const language = changedScene?.language;
     return [langs[language ? language : "javascript"](), themeExt];
-  }, [changedScene?.language, changedScene?.radius]);
+  }, [changedScene?.language, themeExt]);
 
   const updateScene = (scene: Partial<Scene>) => {
     setChangedScene((prev) => ({ ...prev, ...scene } as Scene));
