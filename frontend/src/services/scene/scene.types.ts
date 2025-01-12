@@ -6,11 +6,7 @@ export type GetUserScenesResponse = Scene[];
 
 export type GetSceneResponse = Scene;
 
-export type CreateSceneRequest = {
-  title: string;
-  public: boolean;
-  steps: Step[];
-};
+export type CreateSceneRequest = Partial<Scene>;
 
 export type CreateSceneResponse = Scene;
 

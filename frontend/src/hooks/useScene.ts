@@ -1,3 +1,5 @@
+"use client";
+
 import sceneService from "@/services/scene/scene";
 import {
   CreateSceneRequest,
@@ -21,13 +23,13 @@ export const useGetScene = (id: string) => {
   });
 };
 
-export const useCreateScene = (data: CreateSceneRequest) => {
+export const useCreateScene = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   return useMutation({
-    mutationKey: ["createScene", data],
-    mutationFn: () => {
+    mutationKey: ["createScene"],
+    mutationFn: (data: CreateSceneRequest) => {
       return sceneService.createScene(data);
     },
     onSuccess: (scene) => {

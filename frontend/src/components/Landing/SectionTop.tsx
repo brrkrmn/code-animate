@@ -1,4 +1,7 @@
+import { Scene } from "@/services/scene/scene.types";
 import { createDefaultScene } from "@/utils/createDefaultScene";
+import getScenesFromLs from "@/utils/localStorage/getScenesFromLs/getScenesFromLs";
+import saveScenesToLs from "@/utils/localStorage/saveScenesToLs/saveScenesToLs";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -32,8 +35,16 @@ const SectionTop = () => {
   };
 
   const onTryOut = () => {
-    const defaultScene = createDefaultScene();
-    localStorage.setItem(defaultScene.id, JSON.stringify(defaultScene));
+    const defaultScene: Partial<Scene> = createDefaultScene();
+    const scenes = getScenesFromLs();
+
+    let newScenes;
+    if (!scenes) {
+      newScenes = [defaultScene];
+    } else {
+      newScenes = [...scenes, defaultScene];
+    }
+    saveScenesToLs(newScenes);
     router.push(`/tryout/${defaultScene.id}`);
   };
 

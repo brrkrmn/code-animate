@@ -1,10 +1,12 @@
+import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSelector";
+import { Scene } from "@/services/scene/scene.types";
 import { v4 as uuidv4 } from "uuid";
 
 export const createDefaultScene = () => {
   const id = uuidv4();
   const stepId = uuidv4();
 
-  const defaultScene = {
+  const defaultScene: Partial<Scene> = {
     id: id,
     title: "Untitled",
     public: false,
@@ -18,7 +20,7 @@ export const createDefaultScene = () => {
     background: "transparent",
     radius: "10",
     language: "jsx",
-    theme: "tokyoNight",
+    theme: "tokyoNight" as Theme,
   };
 
   return defaultScene;

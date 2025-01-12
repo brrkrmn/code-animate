@@ -13,11 +13,11 @@ const Dashboard = () => {
   const defaultScene = useMemo(() => {
     return createDefaultScene();
   }, []);
-  const createMutation = useCreateScene(defaultScene);
+  const createMutation = useCreateScene();
   const { filteredScenes } = useScenesContext();
 
   const onCreate = () => {
-    createMutation.mutate();
+    createMutation.mutate(defaultScene);
   };
 
   return (
