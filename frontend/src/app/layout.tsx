@@ -1,3 +1,4 @@
+import ToastProvider from "@/context/toast/toastProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider/ReactQueryProvider";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
 import type { Metadata } from "next";
@@ -21,9 +22,11 @@ const RootLayout = ({
       <body className="antialiased">
         <ReactQueryProvider>
           <ThemeProvider>
-            <SessionProvider>
-              <AuthLayout>{children}</AuthLayout>
-            </SessionProvider>
+            <ToastProvider>
+              <SessionProvider>
+                <AuthLayout>{children}</AuthLayout>
+              </SessionProvider>
+            </ToastProvider>
           </ThemeProvider>
         </ReactQueryProvider>
       </body>

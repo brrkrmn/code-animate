@@ -45,15 +45,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
+  debug: true,
   logger: {
     error(code, ...message) {
       console.log(code, message);
+      console.log("Cause: ", code.cause);
     },
     warn(code, ...message) {
       console.log(code, message);
     },
-    debug(code, ...message) {
-      console.log(code, message);
+    debug(message, metadata) {
+      console.log("Message: ", message);
+      console.log("Metadata: ", metadata);
     },
   },
   ...authConfig,
