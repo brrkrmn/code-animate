@@ -6,7 +6,7 @@ export type SceneContextValue = null | {
   changedScene: Scene | undefined;
   saveChanges: () => void;
   updateScene: (value: Partial<Scene>) => void;
-  deleteScene: () => void;
+  onDelete: () => void;
   extensions: Extensions;
   currentStepNumber: number;
   setCurrentStepNumber: (value: number) => void;
