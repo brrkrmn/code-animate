@@ -1,8 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { Account } from '../model/account';
-import { User } from '../model/user';
+import mongoose from "mongoose";
+import { Account } from "../model/account";
+import { User } from "../model/user";
 
-export const extractUser = async (req: Request, res: Response, next: NextFunction) => {
+export const extractUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
 
@@ -10,12 +15,19 @@ export const extractUser = async (req: Request, res: Response, next: NextFunctio
       return next();
     }
 
-    const account = await Account.findOne({ access_token: token }).exec();
-    if (!account) {
+    const accounts = await Account.find({
+      access_token: token,
+    }).exec();
+
+    if (accounts.length === 0) {
       return next();
     }
 
-    const user = await User.findById(account.userId).exec();
+    const userId = accounts.find((a) => !!a?.userId)?.userId;
+
+    const user = await User.findById(
+      new mongoose.Types.ObjectId(userId as any)
+    ).exec();
     if (!user) {
       return next();
     }

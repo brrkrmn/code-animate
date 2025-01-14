@@ -52,6 +52,8 @@ const AccountSchema = new Schema<AccountDocument>(
 );
 
 AccountSchema.index({ provider: 1, providerAccountId: 1 }, { unique: true });
+AccountSchema.index({ access_token: 1 });
+
 
 AccountSchema.set("toJSON", {
   transform: (document, returnedObject) => {

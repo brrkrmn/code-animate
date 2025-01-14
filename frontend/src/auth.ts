@@ -12,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async signIn({ account, user }) {
       if (account?.access_token && user?.id) {
-        const db = (await client).db();
+        const db = client.db();
         await db
           .collection("accounts")
           .updateOne(
@@ -28,7 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.access_token = account.access_token;
 
         if (user?.id && account.access_token) {
-          const db = (await client).db();
+          const db = client.db();
           await db
             .collection("accounts")
             .updateOne(
