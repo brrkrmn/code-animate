@@ -16,7 +16,7 @@ const Editor = () => {
     saveChanges,
     extensions,
     updateScene,
-    onDelete,
+    deleteScene,
     changedScene,
     currentStepNumber,
   } = useSceneContext();
@@ -56,7 +56,7 @@ const Editor = () => {
           </Link>
           <button
             className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
-            onClick={onDelete}
+            onClick={deleteScene}
           >
             <FaRegTrashAlt className="text-danger-200" />
             Delete

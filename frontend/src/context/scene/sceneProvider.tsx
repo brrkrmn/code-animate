@@ -5,8 +5,6 @@ import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import { EditorView } from "@uiw/react-codemirror";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useToastContext } from "../toast";
-import { toasts } from "../toast/toast.constants";
 import { SceneContextValue } from "./sceneProvider.types";
 
 export const SceneContext = createContext<SceneContextValue>(null);
@@ -34,7 +32,6 @@ const SceneProvider = ({
   const [changedScene, setChangedScene] = useState<Scene | undefined>();
   const [isDirty, setIsDirty] = useState(false);
   const [currentStepNumber, setCurrentStepNumber] = useState(0);
-  const { toast } = useToastContext();
 
   useEffect(() => {
     if (scene) {
@@ -73,12 +70,6 @@ const SceneProvider = ({
   const saveChanges = () => {
     if (!changedScene) return null;
     onSave(changedScene);
-    toast(toasts.saveChanges.success);
-  };
-
-  const onDelete = () => {
-    deleteScene();
-    toast(toasts.deleteScene.success);
   };
 
   return (
@@ -88,7 +79,7 @@ const SceneProvider = ({
         changedScene,
         saveChanges,
         updateScene,
-        onDelete,
+        deleteScene,
         extensions,
         currentStepNumber,
         setCurrentStepNumber,

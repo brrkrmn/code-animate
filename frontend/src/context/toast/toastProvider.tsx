@@ -35,7 +35,7 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       <div
         className={`${
           isVisible ? "opacity-100" : "opacity-0"
-        } transition fixed right-10 bottom-10 bg-background`}
+        } transition absolute bg-background top-2 right-2 rounded-full`}
       >
         <Alert
           isVisible={isVisible}

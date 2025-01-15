@@ -1,5 +1,7 @@
 "use client";
 
+import { useToastContext } from "@/context/toast";
+import { toasts } from "@/context/toast/toast.constants";
 import sceneService from "@/services/scene/scene";
 import {
   CreateSceneRequest,
@@ -26,6 +28,7 @@ export const useGetScene = (id: string) => {
 export const useCreateScene = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { toast } = useToastContext();
 
   return useMutation({
     mutationKey: ["createScene"],
@@ -36,11 +39,16 @@ export const useCreateScene = () => {
       queryClient.invalidateQueries({ queryKey: ["scenes"] });
       router.push(`/${scene.id}`);
     },
+    onError: (error) => {
+      toast(toasts.createScenes.error);
+      console.log(error);
+    },
   });
 };
 
 export const useCreateScenes = () => {
   const queryClient = useQueryClient();
+  const { toast } = useToastContext();
 
   return useMutation({
     mutationKey: ["createScenes"],
@@ -59,11 +67,16 @@ export const useCreateScenes = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["scenes"] });
     },
+    onError: (error) => {
+      toast(toasts.createScenes.error);
+      console.log(error);
+    },
   });
 };
 
 export const useEditScene = (id: string) => {
   const queryClient = useQueryClient();
+  const { toast } = useToastContext();
 
   return useMutation({
     mutationKey: ["editScene", id],
@@ -72,6 +85,11 @@ export const useEditScene = (id: string) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["scene"] });
+      toast(toasts.updateScene.success);
+    },
+    onError: (error) => {
+      toast(toasts.updateScene.error);
+      console.log(error);
     },
   });
 };
@@ -79,6 +97,7 @@ export const useEditScene = (id: string) => {
 export const useDeleteScene = (id: string) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { toast } = useToastContext();
 
   return useMutation({
     mutationKey: ["deleteScene", id],
@@ -88,6 +107,11 @@ export const useDeleteScene = (id: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["scenes"] });
       router.push("/dashboard");
+      toast(toasts.deleteScene.success);
+    },
+    onError: (error) => {
+      toast(toasts.deleteScene.error);
+      console.log(error);
     },
   });
 };
