@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/components/Navbar/Navbar";
 import ScenesProvider from "@/context/scenes/scenesProvider";
 import { useCreateScenes } from "@/hooks/useScene";
 import getScenesFromLs from "@/utils/localStorage/getScenesFromLs/getScenesFromLs";
@@ -17,12 +16,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     createMutation.mutate(scenes);
   }, []);
 
-  return (
-    <ScenesProvider>
-      <Navbar />
-      {children}
-    </ScenesProvider>
-  );
+  return <ScenesProvider>{children}</ScenesProvider>;
 };
 
 export default DashboardLayout;
