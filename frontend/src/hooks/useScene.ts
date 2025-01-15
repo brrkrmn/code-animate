@@ -39,6 +39,29 @@ export const useCreateScene = () => {
   });
 };
 
+export const useCreateScenes = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["createScenes"],
+    mutationFn: async (scenes: CreateSceneRequest[]) => {
+      const results = [];
+      for (const scene of scenes) {
+        try {
+          const createdScene = await sceneService.createScene(scene);
+          results.push(createdScene);
+        } catch (error) {
+          console.error("Error creating scene:", error);
+        }
+      }
+      return results;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["scenes"] });
+    },
+  });
+};
+
 export const useEditScene = (id: string) => {
   const queryClient = useQueryClient();
 
