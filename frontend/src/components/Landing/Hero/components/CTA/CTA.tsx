@@ -25,21 +25,6 @@ const CTA = () => {
     router.push(`/tryout/${defaultScene.id}`);
   };
 
-  const tryoutFloat = {
-    y: [-5, 5, -5],
-    x: [-5, 5, -5],
-  };
-
-  const googleFloat = {
-    y: [5, -5, -5],
-    x: [5, -2, -5],
-  };
-
-  const githubFloat = {
-    y: [-2, 6, -2],
-    x: [2, -5, -2],
-  };
-
   return (
     <motion.div
       initial={{ y: "-100%", opacity: 0 }}
@@ -53,26 +38,12 @@ const CTA = () => {
     >
       <motion.button
         onClick={onTryOut}
-        transition={{
-          repeat: Infinity,
-          repeatType: "reverse",
-          duration: 6,
-          ease: "easeInOut",
-        }}
-        animate={tryoutFloat}
         className="w-40 h-10 rounded-full border-small border-divider bg-content2 gradientText shadow-medium transition hover:shadow-large"
       >
         Try it out!
       </motion.button>
       <motion.button
         onClick={() => signIn("google")}
-        animate={googleFloat}
-        transition={{
-          repeat: Infinity,
-          repeatType: "reverse",
-          duration: 6,
-          ease: "easeInOut",
-        }}
         className="w-fit px-6 h-10 flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large"
       >
         <FcGoogle className="text-foreground-100" />
@@ -80,13 +51,6 @@ const CTA = () => {
       </motion.button>
       <motion.button
         onClick={() => signIn("github")}
-        animate={githubFloat}
-        transition={{
-          repeat: Infinity,
-          repeatType: "reverse",
-          duration: 2,
-          ease: "easeInOut",
-        }}
         className="w-fit px-6 h-10 rounded-full flex items-center justify-center gap-2 border-small border-divider gradientText shadow-medium transition hover:shadow-large"
       >
         <FaGithub />
