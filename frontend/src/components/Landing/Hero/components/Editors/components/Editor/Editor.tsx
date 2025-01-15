@@ -9,6 +9,7 @@ const Editor = ({ editorProps }: { editorProps: EditorProps }) => {
   const [value, setValue] = useState(editorProps.value);
   const editorRef = useRef<EditorView | null>(null);
   const [isEditorReady, setIsEditorReady] = useState(false);
+  const [isReversed, setIsReversed] = useState(false);
 
   const onCreate = (editorView: EditorView) => {
     editorRef.current = editorView;
@@ -28,11 +29,25 @@ const Editor = ({ editorProps }: { editorProps: EditorProps }) => {
 
   const extensions = [javascript({ jsx: true }), themeExt];
 
-  useEffect(() => {
-    if (isEditorReady && editorRef.current && editorProps.transactions) {
-      dispatchTransactions(editorRef.current, editorProps.transactions);
+  const startDispatchCycle = () => {
+    const transactions = isReversed
+      ? editorProps.transactionsReversed
+      : editorProps.transactions;
+
+    if (editorRef.current) {
+      dispatchTransactions(editorRef.current, transactions);
+
+      setTimeout(() => {
+        setIsReversed((prev) => !prev);
+      }, transactions.length * 100 + 500);
     }
-  }, [isEditorReady, editorProps.transactions]);
+  };
+
+  useEffect(() => {
+    if (isEditorReady) {
+      startDispatchCycle();
+    }
+  }, [isEditorReady, isReversed]);
 
   return (
     <div className="border-small border-divider rounded-xl bg-content2 shadow-medium">

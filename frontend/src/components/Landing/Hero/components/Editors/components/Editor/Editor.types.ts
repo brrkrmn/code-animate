@@ -5,4 +5,5 @@ export type EditorProps = {
   height: string;
   width: string;
   transactions: Transaction[];
+  transactionsReversed: Transaction[];
 };
