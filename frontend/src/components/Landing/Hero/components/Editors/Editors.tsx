@@ -1,7 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Editor from "./components/Editor/Editor";
-import { editorProps } from "./constants";
 
 const Editors = () => {
   const editorsRef = useRef(null);
@@ -47,9 +45,16 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-fit h-fit absolute top-8 -left-24"
+        className="w-fit h-fit absolute top-8 -left-24 rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
-        <Editor editorProps={editorProps[0]} />
+        <video
+          src="/video/hero-left.mp4"
+          autoPlay
+          muted
+          loop
+          width={600}
+          height="auto"
+        />
       </motion.div>
       <motion.div
         style={{ opacity }}
@@ -60,9 +65,16 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-fit h-fit absolute left-1/2 top-1/2 transform"
+        className="w-fit h-fit absolute left-1/2 top-1/2 transform rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
-        <Editor editorProps={editorProps[2]} />
+        <video
+          src="/video/hero-middle.mp4"
+          autoPlay
+          muted
+          loop
+          width={900}
+          height="auto"
+        />
       </motion.div>
       <motion.div
         animate={floatRight}
@@ -72,9 +84,16 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-fit h-fit absolute top-28 -right-36"
+        className="w-fit h-fit absolute top-28 -right-36 rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
-        <Editor editorProps={editorProps[1]} />
+        <video
+          src="/video/hero-right.mp4"
+          autoPlay
+          muted
+          loop
+          width={450}
+          height="auto"
+        />
       </motion.div>
     </motion.div>
   );
