@@ -14,12 +14,8 @@ const Features = () => {
     <motion.div
       ref={sectionRef}
       style={{ opacity }}
-      className="border-2 p-20 w-screen h-screen flex flex-col items-center justify-between landingBg"
-    >
-      <div className="text-6xl featuresTitle leading-normal">
-        level up your presentations
-      </div>
-    </motion.div>
+      className="p-20 w-screen h-screen flex flex-col items-center justify-between"
+    ></motion.div>
   );
 };
 
