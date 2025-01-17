@@ -17,7 +17,7 @@ export const createDefaultScene = () => {
           '<button\n  onClick={onCreate}\n  className="flex items-center justify-center gap-2 w-fit px-5 py-1 rounded-full"\n>\n  <FaPlus className="w-4 h-4" />\n  <p>Create Scene</p>\n</button>',
       },
     ],
-    background: "transparent",
+    background: "#05060f",
     radius: "10",
     language: "jsx",
     theme: "tokyoNight" as Theme,

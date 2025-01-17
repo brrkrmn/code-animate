@@ -5,6 +5,8 @@ import ReactColorPicker from "react-best-gradient-color-picker";
 const BackgroundPicker = () => {
   const { changedScene, updateScene } = useSceneContext();
 
+  if (!changedScene) return null;
+
   return (
     <Popover
       triggerScaleOnOpen={false}
@@ -19,13 +21,13 @@ const BackgroundPicker = () => {
           <p className="line-clamp-1">Background Color</p>
           <span
             className="h-8 w-8 rounded-lg shrink-0"
-            style={{ background: changedScene?.background }}
+            style={{ background: changedScene.background }}
           ></span>
         </button>
       </PopoverTrigger>
       <PopoverContent>
         <ReactColorPicker
-          value={changedScene?.background}
+          value={changedScene.background}
           onChange={(val) => updateScene({ background: val })}
         />
       </PopoverContent>

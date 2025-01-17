@@ -32,6 +32,8 @@ const Editor = () => {
     [changedScene, currentStepNumber]
   );
 
+  if (!changedScene) return null;
+
   return (
     <div className="w-full h-full min-h-screen flex flex-col gap-6 py-6">
       <div className="flex flex-col tablet:flex-row items-start tablet:items-center justify-between gap-4 mb-4">
@@ -47,7 +49,7 @@ const Editor = () => {
             </button>
           )}
           <Link
-            href={`${changedScene?.id}/preview`}
+            href={`${changedScene.id}/preview`}
             target="_blank"
             className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
           >
@@ -65,13 +67,13 @@ const Editor = () => {
       </div>
       <Toolbar />
       <div
-        style={{ background: changedScene?.background }}
         className="relative border-small rounded-xl border-divider py-10 px-2 tablet:py-24 tablet:px-16"
+        style={{ background: changedScene.background }}
       >
         <CodeMirror
           minHeight="200px"
           className="w-full h-full"
-          value={changedScene?.steps[currentStepNumber].content}
+          value={changedScene.steps[currentStepNumber].content}
           onChange={onChange}
           theme={themes[changedScene?.theme as keyof typeof themes] as Theme}
           extensions={extensions}
