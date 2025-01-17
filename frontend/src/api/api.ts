@@ -11,7 +11,17 @@ export const backendService = axios.create({
 });
 
 backendService.interceptors.request.use(async (config) => {
-  const session = await getSession();
+  let session;
+
+  if (typeof window === "undefined") {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { auth } = require("@/auth");
+
+    session = await auth();
+  } else {
+    session = await getSession();
+  }
+
   const token = session?.access_token;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

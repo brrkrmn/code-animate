@@ -14,6 +14,7 @@ export const useGetScenes = () => {
   return useQuery({
     queryKey: ["scenes"],
     queryFn: sceneService.getUserScenes,
+    staleTime: 3000,
   });
 };
 

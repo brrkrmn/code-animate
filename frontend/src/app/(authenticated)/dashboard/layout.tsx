@@ -1,6 +1,5 @@
 "use client";
 
-import ScenesProvider from "@/context/scenes/scenesProvider";
 import { useCreateScenes } from "@/hooks/useScene";
 import getScenesFromLs from "@/utils/localStorage/getScenesFromLs/getScenesFromLs";
 import removeScenesFromLs from "@/utils/localStorage/removeScenesFromLs/removeScenesFromLs";
@@ -16,7 +15,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     createMutation.mutate(scenes);
   }, []);
 
-  return <ScenesProvider>{children}</ScenesProvider>;
+  return children;
 };
 
 export default DashboardLayout;
