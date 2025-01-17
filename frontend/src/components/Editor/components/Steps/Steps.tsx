@@ -30,6 +30,10 @@ const Steps = () => {
         (step, index) => index !== currentStepNumber
       ),
     });
+
+    if (currentStepNumber === changedScene!.steps.length - 1) {
+      setCurrentStepNumber(currentStepNumber - 1);
+    }
   };
 
   useEffect(() => {
