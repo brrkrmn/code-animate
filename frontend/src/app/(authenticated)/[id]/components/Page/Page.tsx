@@ -1,11 +1,12 @@
 "use client";
 
+import Editor from "@/components/Editor/Editor";
 import SceneProvider from "@/context/scene/sceneProvider";
 import { useDeleteScene, useEditScene, useGetScene } from "@/hooks/useScene";
 import { Scene } from "@/services/scene/scene.types";
 import { useParams } from "next/navigation";
 
-const EditorLayout = ({ children }: { children: React.ReactNode }) => {
+const Page = () => {
   const params = useParams();
   const id = params.id as string;
   const { data: scene } = useGetScene(id);
@@ -23,9 +24,9 @@ const EditorLayout = ({ children }: { children: React.ReactNode }) => {
   if (!scene) return null;
   return (
     <SceneProvider onSave={onSave} deleteScene={deleteScene} scene={scene}>
-      {children}
+      <Editor />
     </SceneProvider>
   );
 };
 
-export default EditorLayout;
+export default Page;

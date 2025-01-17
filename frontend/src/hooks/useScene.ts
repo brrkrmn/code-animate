@@ -23,6 +23,7 @@ export const useGetScene = (id: string) => {
     queryKey: ["scene", id],
     queryFn: () => sceneService.getScene(id),
     enabled: id !== "dashboard",
+    staleTime: 3000,
   });
 };
 
