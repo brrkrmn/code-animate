@@ -37,7 +37,7 @@
 
 .landingBg {
   background: rgb(24,67,96);
-  background: linear-gradient(0deg, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 30%);
+  background: linear-gradient(0deg, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 70%);
 }
 
 .landingBgReverse {
@@ -47,4 +47,11 @@
 
 .landingEditor .cm-editor {
   background: transparent;
+}
+
+.featuresTitle {
+  background: linear-gradient(180deg,rgba(24,67,96,1) 0%,#98c0ef 30%, #98c0ef 80%, rgba(24,67,96,1) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
