@@ -7,5 +7,6 @@ export type PreviewEditorProps = {
   lang: Language;
   theme: Theme;
   onCreate: (value: EditorView) => void;
-  initialValue: string;
+  setValue: (value: string) => void;
+  value: string;
 };

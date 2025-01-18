@@ -3,7 +3,7 @@ import { Extension } from "@codemirror/state";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { PreviewEditorProps } from "./PreviewEditor.types";
 
 const PreviewEditor = ({
@@ -11,10 +11,9 @@ const PreviewEditor = ({
   radius,
   lang,
   onCreate,
-  initialValue,
+  setValue,
+  value,
 }: PreviewEditorProps) => {
-  const [value, setValue] = useState(initialValue);
-
   const onChange = (val: string) => setValue(val);
 
   const themeExt = useMemo(

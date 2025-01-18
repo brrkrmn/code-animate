@@ -1,11 +1,7 @@
-import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSelector";
-import PreviewEditor from "@/components/Preview/components/PreviewEditor/PreviewEditor";
-import { EditorView } from "@uiw/react-codemirror";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const Demo = () => {
-  const editorRef = useRef<EditorView | null>(null);
   const demoRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: demoRef,
@@ -34,10 +30,6 @@ const Demo = () => {
     ["0.5", "1", "1"]
   );
 
-  const onCreate = (editorView: EditorView) => {
-    editorRef.current = editorView;
-  };
-
   return (
     <motion.div
       ref={demoRef}
@@ -50,15 +42,7 @@ const Demo = () => {
         <motion.div
           style={{ scale: editorScale }}
           className="flex items-center justify-center w-full"
-        >
-          <PreviewEditor
-            theme={"abyss" as Theme}
-            radius="20"
-            lang="javascript"
-            onCreate={onCreate}
-            initialValue={`Codymate is a tool to level up your code presentation \n\n\n\n\n`}
-          />
-        </motion.div>
+        ></motion.div>
       </motion.div>
     </motion.div>
   );

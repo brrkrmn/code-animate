@@ -12,6 +12,11 @@ const Preview = ({ scene }: { scene: Scene }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const editorRef = useRef<EditorView | null>(null);
   const timeoutIdsRef = useRef<NodeJS.Timeout[]>([]);
+  const [value, setValue] = useState(scene.steps[0].content);
+
+  const syncEditor = (content: string) => {
+    setValue(content);
+  };
 
   const onNextStep = useCallback(() => {
     if (!editorRef.current || !scene) return null;
@@ -20,6 +25,8 @@ const Preview = ({ scene }: { scene: Scene }) => {
 
     const currentContent = scene.steps[currentIndex].content;
     const nextContent = scene.steps[currentIndex + 1].content;
+
+    syncEditor(currentContent);
 
     const transactions = getTransactions(currentContent, nextContent);
     const timeoutIds = dispatchTransactions(editorRef.current, transactions);
@@ -34,6 +41,8 @@ const Preview = ({ scene }: { scene: Scene }) => {
 
     const currentContent = scene.steps[currentIndex].content;
     const prevContent = scene.steps[currentIndex - 1].content;
+
+    syncEditor(currentContent);
 
     const transactions = getTransactions(currentContent, prevContent);
     const timeoutIds = dispatchTransactions(editorRef.current, transactions);
@@ -82,7 +91,8 @@ const Preview = ({ scene }: { scene: Scene }) => {
         radius={scene.radius}
         theme={scene.theme}
         onCreate={onCreate}
-        initialValue={scene.steps[0].content}
+        value={value}
+        setValue={setValue}
       />
       <Controls
         onPrevStep={onPrevStep}

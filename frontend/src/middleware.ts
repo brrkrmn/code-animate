@@ -17,3 +17,7 @@ export async function middleware(req: NextRequest) {
 
   return response || NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/dashboard", "/:id"],
+};
