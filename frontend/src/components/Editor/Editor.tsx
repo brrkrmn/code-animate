@@ -3,10 +3,10 @@ import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSe
 import TitleInput from "@/components/Editor/components/Toolbar/components/TitleInput/TitleInput";
 import Toolbar from "@/components/Editor/components/Toolbar/Toolbar";
 import { useSceneContext } from "@/context/scene";
-import { Tooltip } from "@nextui-org/react";
+import { Button, Tooltip } from "@nextui-org/react";
+import { useIsMutating } from "@tanstack/react-query";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
-import Link from "next/link";
 import { useCallback, useState } from "react";
 import { FaRegTrashAlt, FaSave } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
@@ -22,6 +22,8 @@ const Editor = () => {
     currentStepNumber,
   } = useSceneContext();
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const isDeleting = useIsMutating({ mutationKey: ["deleteScene"] });
+  const isSaving = useIsMutating({ mutationKey: ["editScene"] });
 
   const onChange = useCallback(
     (val: string) => {
@@ -48,13 +50,20 @@ const Editor = () => {
         <TitleInput />
         <div className="flex items-center justify-end gap-4">
           {isDirty && (
-            <button
-              className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
-              onClick={saveChanges}
+            <Button
+              variant="bordered"
+              size="md"
+              className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-md font-extralight text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+              onPress={saveChanges}
+              startContent={
+                isSaving === 0 ? (
+                  <FaSave className="text-success-200 text-lg" />
+                ) : null
+              }
+              isLoading={isSaving !== 0}
             >
-              <FaSave className="text-success-200" />
               Save
-            </button>
+            </Button>
           )}
           <Tooltip
             isOpen={isTooltipOpen}
@@ -66,22 +75,33 @@ const Editor = () => {
               base: "bg-content2 text-foreground-100 rounded-full",
             }}
           >
-            <Link
-              href={`${changedScene.id}/preview`}
+            <Button
+              variant="bordered"
+              size="md"
+              onPress={() =>
+                window.open(`${changedScene.id}/preview`, "_blank")
+              }
               target="_blank"
-              className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+              className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-md font-extralight text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
             >
               <FaPlay className="text-default-300" />
               Preview
-            </Link>
+            </Button>
           </Tooltip>
-          <button
-            className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
-            onClick={deleteScene}
+          <Button
+            variant="bordered"
+            size="md"
+            startContent={
+              isDeleting === 0 ? (
+                <FaRegTrashAlt className="text-danger-200 text-lg" />
+              ) : null
+            }
+            isLoading={isDeleting !== 0}
+            className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-md font-extralight text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+            onPress={deleteScene}
           >
-            <FaRegTrashAlt className="text-danger-200" />
             Delete
-          </button>
+          </Button>
         </div>
       </div>
       <Toolbar />
