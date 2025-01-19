@@ -3,10 +3,11 @@ import { Theme } from "@/components/Editor/components/Toolbar/components/ThemeSe
 import TitleInput from "@/components/Editor/components/Toolbar/components/TitleInput/TitleInput";
 import Toolbar from "@/components/Editor/components/Toolbar/Toolbar";
 import { useSceneContext } from "@/context/scene";
+import { Tooltip } from "@nextui-org/react";
 import * as themes from "@uiw/codemirror-themes-all";
 import CodeMirror from "@uiw/react-codemirror";
 import Link from "next/link";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { FaRegTrashAlt, FaSave } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
 
@@ -20,6 +21,7 @@ const Editor = () => {
     changedScene,
     currentStepNumber,
   } = useSceneContext();
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const onChange = useCallback(
     (val: string) => {
@@ -31,6 +33,12 @@ const Editor = () => {
     },
     [changedScene, currentStepNumber]
   );
+
+  const openTooltip = (open: boolean) => {
+    if (isDirty) {
+      setIsTooltipOpen(open);
+    }
+  };
 
   if (!changedScene) return null;
 
@@ -48,14 +56,25 @@ const Editor = () => {
               Save
             </button>
           )}
-          <Link
-            href={`${changedScene.id}/preview`}
-            target="_blank"
-            className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+          <Tooltip
+            isOpen={isTooltipOpen}
+            onOpenChange={openTooltip}
+            content="Save your changes to see in the preview"
+            placement="bottom"
+            radius="full"
+            classNames={{
+              base: "bg-content2 text-foreground-100 rounded-full",
+            }}
           >
-            <FaPlay className="text-default-300" />
-            Preview
-          </Link>
+            <Link
+              href={`${changedScene.id}/preview`}
+              target="_blank"
+              className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
+            >
+              <FaPlay className="text-default-300" />
+              Preview
+            </Link>
+          </Tooltip>
           <button
             className="border-small rounded-full w-fit px-4 flex items-center justify-center gap-2 h-10 border-divider text-foreground text-opacity-80 transition hover:shadow-medium hover:text-opacity-100"
             onClick={deleteScene}
