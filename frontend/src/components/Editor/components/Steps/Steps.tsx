@@ -13,15 +13,17 @@ const Steps = () => {
 
   const createStep = () => {
     const id = uuidv4();
-    updateScene({
-      steps: [
-        ...(changedScene?.steps || []),
-        {
-          id,
-          content: changedScene?.steps?.[currentStepNumber]?.content || "",
-        } as Step,
-      ],
-    });
+    const newSteps = [
+      ...(changedScene?.steps || []),
+      {
+        id,
+        content:
+          changedScene?.steps?.[changedScene.steps.length - 1]?.content || "",
+      } as Step,
+    ];
+
+    updateScene({ steps: newSteps });
+    setCurrentStepNumber(newSteps.length - 1);
   };
 
   const deleteStep = () => {
