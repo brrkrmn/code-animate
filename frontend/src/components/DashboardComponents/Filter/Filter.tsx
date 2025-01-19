@@ -1,3 +1,4 @@
+import { Language } from "@/components/Editor/components/Toolbar/components/LanguageSelector";
 import { useScenesContext } from "@/context/scenes";
 import type { Selection } from "@nextui-org/react";
 import {
@@ -10,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { IoOptionsOutline } from "react-icons/io5";
-import { Language } from "../Editor/components/Toolbar/components/LanguageSelector";
 
 const Filter = () => {
   const { scenes, setFilteredScenes } = useScenesContext();
