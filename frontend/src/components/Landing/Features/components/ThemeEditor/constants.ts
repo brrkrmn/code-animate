@@ -1,0 +1,9 @@
+export const themeEditorValues = [
+  'const currentHeaders = await headers();\nconst pathname = currentHeaders.get("x-pathname") || "Unknown Pathname";\nconst id = pathname.split("/")[1];\nconst qClient = queryClient();\n\nawait qClient.fetchQuery({\n  queryKey: ["scene", id],\n  queryFn: () => sceneService.getScene(id),\n});',
+  'const themeExt = EditorView.theme({\n  "&.cm-editor": {\n    outline: "none",\n    borderRadius: "10px",\n  },\n  ".cm-scroller": {\n    borderRadius: "10px",\n  },\n});',
+  '<Marquee pauseOnClick gradient gradientColor="#05060f">\n  {Object.keys(langs).map((lang, index) => (\n    <div\n      className="border-small border-divider rounded-full bg-content1 shadow-large py-1 px-5 mx-2 text-xl flex items-center justify-center gradientText transition hover:scale-105"\n      key={index}\n    >\n      {lang}\n    </div>))}\n</Marquee>',
+  'const background = useTransform(\n  scrollYProgress,\n  [0.4, 0.5, 1],\n  [\n    "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 0%)",\n    "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 80%)",\n    "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 0%)",\n  ]\n);',
+  'const onGoogleLogin = () => {\n  setIsGoogleLoading(true);\n  signIn("google");\n};\n\nconst onGithubLogin = () => {\n  setIsGithubLoading(true);\n  signIn("github");\n};',
+  "const onNextStep = useCallback(() => {\n  if (!editorRef.current || !scene) return null;\n\n  timeoutIdsRef.current.forEach((id) => clearTimeout(id));\n\n  const transactions = getTransactions(currentContent, nextContent);\n  const timeoutIds = dispatchTransactions(editorRef.current, transactions);\n  timeoutIdsRef.current = timeoutIds;\n}, [currentIndex, scene]);",
+  "const updateScene = (scene: Partial<Scene>) => {\n  setChangedScene((prev) => ({ ...prev, ...scene } as Scene));\n};\n\nconst saveChanges = () => {\n  if (!changedScene) return null;\n  onSave(changedScene);\n};",
+];
