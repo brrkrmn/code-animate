@@ -1,4 +1,3 @@
-import toggleFullScreen from "@/utils/toggleFullScreen/toggleFullScreen";
 import { Tooltip } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
@@ -10,8 +9,8 @@ const Controls = ({
   onNextStep,
   currentIndex,
   maxIndex,
+  fullScreenHandle,
 }: ComponentProps) => {
-  const [isFullScreen, setIsFullScreen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -30,11 +29,6 @@ const Controls = ({
       clearTimeout(closeTimeoutId);
     };
   }, []);
-
-  const handleToggleFullScreen = () => {
-    toggleFullScreen();
-    setIsFullScreen(!isFullScreen);
-  };
 
   return (
     <div
@@ -61,11 +55,15 @@ const Controls = ({
         </button>
       </Tooltip>
       <button
-        onClick={handleToggleFullScreen}
+        onClick={
+          fullScreenHandle.active
+            ? fullScreenHandle.exit
+            : fullScreenHandle.enter
+        }
         className="
        enabled:hover:shadow-large shadow-medium disabled:shadow-none group border-small border-divider rounded-lg bg-content1 p-2 transition"
       >
-        {isFullScreen ? (
+        {fullScreenHandle.active ? (
           <RiFullscreenExitLine className="text-xl text-foreground-100" />
         ) : (
           <RiFullscreenLine className="text-xl text-foreground-100" />

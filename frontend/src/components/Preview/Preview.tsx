@@ -5,6 +5,7 @@ import dispatchTransactions from "@/utils/dispatchTransactions/dispatchTransacti
 import getTransactions from "@/utils/getTransactions/getTransactions";
 import { EditorView } from "@uiw/react-codemirror";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Controls from "./components/Controls/Controls";
 import PreviewEditor from "./components/PreviewEditor/PreviewEditor";
 
@@ -13,6 +14,7 @@ const Preview = ({ scene }: { scene: Scene }) => {
   const editorRef = useRef<EditorView | null>(null);
   const timeoutIdsRef = useRef<NodeJS.Timeout[]>([]);
   const [value, setValue] = useState(scene.steps[0].content);
+  const fullScreenHandle = useFullScreenHandle();
 
   const syncEditor = (content: string) => {
     setValue(content);
@@ -82,25 +84,28 @@ const Preview = ({ scene }: { scene: Scene }) => {
   if (!scene) return null;
 
   return (
-    <div
-      className="w-full h-screen flex flex-col items-center justify-center px-4 tablet:px-40"
-      style={{ background: scene.background }}
-    >
-      <PreviewEditor
-        lang={scene.language}
-        radius={scene.radius}
-        theme={scene.theme}
-        onCreate={onCreate}
-        value={value}
-        setValue={setValue}
-      />
-      <Controls
-        onPrevStep={onPrevStep}
-        onNextStep={onNextStep}
-        currentIndex={currentIndex}
-        maxIndex={scene.steps.length - 1}
-      />
-    </div>
+    <FullScreen handle={fullScreenHandle}>
+      <div
+        className="w-full h-screen flex flex-col items-center justify-center px-4 tablet:px-40"
+        style={{ background: scene.background }}
+      >
+        <PreviewEditor
+          lang={scene.language}
+          radius={scene.radius}
+          theme={scene.theme}
+          onCreate={onCreate}
+          value={value}
+          setValue={setValue}
+        />
+        <Controls
+          fullScreenHandle={fullScreenHandle}
+          onPrevStep={onPrevStep}
+          onNextStep={onNextStep}
+          currentIndex={currentIndex}
+          maxIndex={scene.steps.length - 1}
+        />
+      </div>
+    </FullScreen>
   );
 };
 
