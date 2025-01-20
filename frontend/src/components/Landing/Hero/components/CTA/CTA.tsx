@@ -2,16 +2,20 @@ import { Scene } from "@/services/scene/scene.types";
 import { createDefaultScene } from "@/utils/createDefaultScene";
 import getScenesFromLs from "@/utils/localStorage/getScenesFromLs/getScenesFromLs";
 import saveScenesToLs from "@/utils/localStorage/saveScenesToLs/saveScenesToLs";
+import { Spinner } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 const CTA = () => {
+  const [isTryoutLoading, setIsTryoutLoading] = useState(false);
   const router = useRouter();
 
   const onTryOut = () => {
+    setIsTryoutLoading(true);
     const defaultScene: Partial<Scene> = createDefaultScene();
     const scenes = getScenesFromLs();
 
@@ -38,9 +42,19 @@ const CTA = () => {
     >
       <motion.button
         onClick={onTryOut}
-        className="w-40 h-10 rounded-full border-small border-divider bg-content2 gradientText shadow-medium transition hover:shadow-large"
+        className="w-40 h-10 rounded-full flex items-center justify-center gap-1 border-small border-divider bg-content2 gradientText shadow-medium transition hover:shadow-large"
       >
-        Try it out!
+        {isTryoutLoading ? (
+          <Spinner
+            size="sm"
+            classNames={{
+              circle1: "border-b-foreground-50",
+              circle2: "border-b-foreground-50",
+            }}
+          />
+        ) : (
+          "Try it out!"
+        )}
       </motion.button>
       <motion.button
         onClick={() => signIn("google")}
