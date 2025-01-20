@@ -9,14 +9,14 @@ const Demo = () => {
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
   const background = useTransform(
     scrollYProgress,
-    [0, 0.5, 1],
+    [0.4, 0.5, 1],
     [
       "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 0%)",
-      "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 60%)",
+      "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 80%)",
       "radial-gradient(circle, rgba(24,67,96,1) 0%, rgba(5,6,15,1) 0%)",
     ]
   );
@@ -27,7 +27,7 @@ const Demo = () => {
     <motion.div
       ref={sectionRef}
       style={{ background, opacity }}
-      className="w-screen h-screen flex flex-col items-center justify-center gap-10 px-4"
+      className="w-screen h-[150vh] flex flex-col items-center justify-center gap-10 px-4"
     >
       <motion.div className="gradientText text-4xl">
         Level up your code presentation
