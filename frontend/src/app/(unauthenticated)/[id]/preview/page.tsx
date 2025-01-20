@@ -1,16 +1,29 @@
-"use client";
-
 import Preview from "@/components/Preview/Preview";
-import { useGetScene } from "@/hooks/useScene";
-import { useParams } from "next/navigation";
+import sceneService from "@/services/scene/scene";
+import { queryClient } from "@/utils/QueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { headers } from "next/headers";
 
-const PreviewPage = () => {
-  const params = useParams();
-  const id = params.id as string;
-  const { data: scene } = useGetScene(id);
+const PreviewPage = async () => {
+  const currentHeaders = await headers();
+  const pathname = currentHeaders.get("x-pathname") || "Unknown Pathname";
+  const id = pathname.split("/")[1];
+  const qClient = queryClient();
+
+  const scene = await qClient.fetchQuery({
+    queryKey: ["scene", id],
+    queryFn: () => sceneService.getScene(id),
+  });
+
+  const dehydratedState = dehydrate(qClient);
 
   if (!scene) return null;
-  return <Preview scene={scene} />;
+
+  return (
+    <HydrationBoundary state={dehydratedState}>
+      <Preview scene={scene} />
+    </HydrationBoundary>
+  );
 };
 
 export default PreviewPage;
