@@ -17,20 +17,22 @@ const ThemeEditor = ({ theme, value }: ComponentProps) => {
     ".cm-scroller": {
       borderRadius: "10px",
       padding: "20px 20px",
+      overflow: "hidden",
     },
     ".cm-line": {
       borderRadius: "10px",
+      fontSize: "10px",
     },
   });
 
   return (
-    <div className="rounded-xl overflow-hidden flex items-center justify-center mx-2">
+    <div className="rounded-xl flex items-center justify-center mx-2 my-4 border-small border-divider p-2 bg-content2 shadow-small transition duration-500 hover:scale-105">
       <ReactCodeMirror
         value={value}
         theme={themes[theme as keyof typeof themes] as Theme}
-        width="350px"
+        width="300px"
         extensions={[javascript({ jsx: true }), themeExt]}
-        height="200px"
+        height="180px"
         editable={false}
         basicSetup={{
           lineNumbers: false,
