@@ -18,38 +18,12 @@ const Features = () => {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
 
-  const background = useTransform(
-    scrollYProgress,
-    [0.1, 0.2, 0.5, 1],
-    [
-      "linear-gradient(180deg, rgba(0,0,0,1) 80%, #000000 90%, rgba(0,0,0,1) 100%)",
-      "linear-gradient(170deg, rgba(0,0,0,1) 60%, rgba(18,50,71,1) 90%, rgba(0,0,0,1) 100%)",
-      "linear-gradient(120deg, rgba(0,0,0,1) 40%, rgba(18,50,71,1) 60%, rgba(0,0,0,1) 65%)",
-      "linear-gradient(60deg, rgba(0,0,0,1) 40%, #081620 60%, rgba(0,0,0,1) 65%)",
-    ]
-  );
-
-  const background2 = useTransform(
-    scrollYProgress,
-    [0.1, 0.2, 0.5, 1],
-    [
-      "linear-gradient(180deg, rgba(0,0,0,0) 80%, #000000 90%, rgba(0,0,0,0) 100%)",
-      "linear-gradient(190deg, rgba(0,0,0,0) 60%, rgba(18,50,71,1) 90%, rgba(0,0,0,0) 100%)",
-      "linear-gradient(240deg, rgba(0,0,0,0) 40%, rgba(18,50,71,1) 60%, rgba(0,0,0,0) 65%)",
-      "linear-gradient(300deg, rgba(0,0,0,0) 40%, #000000 60%, rgba(0,0,0,0) 65%)",
-    ]
-  );
-
   return (
     <motion.div
       ref={sectionRef}
-      style={{ opacity, background }}
+      style={{ opacity }}
       className="relative w-full h-[120vh] flex flex-col items-center justify-start gap-28"
     >
-      <motion.div
-        style={{ background: background2 }}
-        className="absolute w-full h-[120vh] top-0 left-0"
-      ></motion.div>
       <div className="flex flex-col items-center justify-center gap-4 mt-40 z-50">
         <div className="text-6xl py-2 text-transparent tracking-wide bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-80%">
           Customize
