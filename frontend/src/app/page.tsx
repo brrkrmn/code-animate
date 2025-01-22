@@ -18,10 +18,10 @@ const Home = () => {
     scrollYProgress,
     [0.1, 0.2, 0.3, 0.5],
     [
-      "linear-gradient(180deg, rgba(0,0,0,1) 80%, #000000 90%, rgba(0,0,0,1) 100%)",
-      "linear-gradient(170deg, rgba(0,0,0,1) 60%, rgba(18,50,71,1) 90%, rgba(0,0,0,1) 100%)",
-      "linear-gradient(120deg, rgba(0,0,0,1) 40%, rgba(18,50,71,1) 60%, rgba(0,0,0,1) 65%)",
-      "linear-gradient(60deg, rgba(0,0,0,1) 40%, rgba(18,50,71,1) 60%, rgba(0,0,0,1) 65%)",
+      "linear-gradient(180deg, rgba(5,6,15,1) 80%, rgba(5,6,15,1) 90%, rgba(5,6,15,1) 100%)",
+      "linear-gradient(170deg, rgba(5,6,15,1) 60%, rgba(18,50,71,1) 90%, rgba(5,6,15,1) 100%)",
+      "linear-gradient(120deg, rgba(5,6,15,1) 40%, rgba(18,50,71,1) 60%, rgba(5,6,15,1) 65%)",
+      "linear-gradient(60deg, rgba(5,6,15,1) 40%, rgba(18,50,71,1) 60%, rgba(5,6,15,1) 65%)",
     ]
   );
 

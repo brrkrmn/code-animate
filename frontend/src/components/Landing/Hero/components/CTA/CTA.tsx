@@ -10,7 +10,7 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Spinner from "./components/Spinner/Spinner";
 
-const CTA = () => {
+const CTA = ({ wrapped = false }: { wrapped: boolean }) => {
   const [isTryoutLoading, setIsTryoutLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isGithubLoading, setIsGithubLoading] = useState(false);
@@ -51,32 +51,46 @@ const CTA = () => {
         duration: 2,
         ease: "easeInOut",
       }}
-      className="flex items-center justify-center gap-4 z-40"
+      className={`flex ${
+        wrapped ? "flex-col gap-10" : "flex-row gap-4"
+      } items-center justify-center z-40`}
     >
       <motion.button
         onClick={onTryOut}
-        className="w-40 h-10 rounded-full flex items-center justify-center gap-1 border-small border-divider bg-content2 gradientText shadow-medium transition hover:shadow-large"
+        className={`${
+          wrapped ? "h-14 text-xl w-full" : "h-10 w-40"
+        } rounded-full flex items-center justify-center gap-1 gradientText shadow-medium bg-content2 border-small border-divider transition duration-400 hover:shadow-large`}
       >
         {isTryoutLoading ? <Spinner /> : "Try it out!"}
       </motion.button>
-      <motion.button
-        onClick={onGoogleLogin}
-        className="w-fit px-6 h-10 flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large"
+      <div
+        className={`w-full flex items-center gap-4 ${
+          wrapped ? "flex-col border-t-small border-divider pt-10" : "flex-row"
+        }`}
       >
-        {isGoogleLoading ? (
-          <Spinner />
-        ) : (
-          <FcGoogle className="text-foreground-100" />
-        )}
-        <p className="gradientText">Log in with Google</p>
-      </motion.button>
-      <motion.button
-        onClick={onGithubLogin}
-        className="w-fit px-6 h-10 rounded-full flex items-center justify-center gap-2 border-small border-divider gradientText shadow-medium transition hover:shadow-large"
-      >
-        {isGithubLoading ? <Spinner /> : <FaGithub />}
-        Log in with Github
-      </motion.button>
+        <motion.button
+          onClick={onGoogleLogin}
+          className={`w-fit ${
+            wrapped ? "px-12 text-xl h-14" : "px-6 h-10"
+          } flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large`}
+        >
+          {isGoogleLoading ? (
+            <Spinner />
+          ) : (
+            <FcGoogle className="text-foreground-100" />
+          )}
+          <p className="gradientText">Log in with Google</p>
+        </motion.button>
+        <motion.button
+          onClick={onGithubLogin}
+          className={`w-fit ${
+            wrapped ? "px-12 text-xl h-14" : "px-6 h-10"
+          } flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large`}
+        >
+          {isGithubLoading ? <Spinner /> : <FaGithub />}
+          Log in with Github
+        </motion.button>
+      </div>
     </motion.div>
   );
 };
