@@ -45,15 +45,14 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-fit h-fit absolute top-8 -left-24 rounded-xl shadow-medium overflow-hidden border-small border-divider"
+        className="w-[300px] tablet:w-[400px] laptop:w-fit h-fit absolute top-8 -left-24 rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
         <video
           src="/video/hero-left.mp4"
           autoPlay
           muted
           loop
-          className="w-[300px] tablet:w-[400px] laptop:[600px]"
-          width={600}
+          width="600"
           height="auto"
         />
       </motion.div>
@@ -66,7 +65,7 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-[80%] laptop:w-fit h-fit absolute left-1/2 top-1/2 transform rounded-xl shadow-medium overflow-hidden border-small border-divider"
+        className="w-96 tablet:w-[80%] mt-20 tablet:mt-0 laptop:w-fit h-fit absolute left-1/2 top-1/2 transform rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
         <video
           src="/video/hero-middle.mp4"

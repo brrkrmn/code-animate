@@ -22,13 +22,13 @@ const Features = () => {
     <motion.div
       ref={sectionRef}
       style={{ opacity }}
-      className="relative w-full h-[120vh] flex flex-col items-center justify-start gap-28"
+      className="relative w-full h-screen tablet:h-[120vh] flex flex-col items-center justify-start gap-28"
     >
       <div className="flex flex-col items-center justify-center gap-4 mt-40 z-50">
-        <div className="text-6xl py-2 text-transparent tracking-wide bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-80%">
+        <div className="text-5xl tablet:text-6xl py-2 text-transparent tracking-wide bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-80%">
           Customize
         </div>
-        <div className="text-transparent bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-50% text-3xl">
+        <div className="text-transparent bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-50% text-center text-2xl tablet:text-3xl">
           language, theme, and styling options
         </div>
       </div>

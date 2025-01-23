@@ -19,6 +19,7 @@
 }
 
 .index-module_type__E-SaG {
+  text-align: center;
   background: linear-gradient(0deg,#d8ecf8 0%,#98c0ef 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -70,7 +71,7 @@
 
 @media (max-width: 425px) {
   .index-module_type__E-SaG {
-    font-size: 40px;
+    font-size: 50px;
   }
 
   .index-module_type__E-SaG::after {

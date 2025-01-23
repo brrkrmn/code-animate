@@ -17,7 +17,7 @@ const GetStarted = () => {
       ref={sectionRef}
       className="w-screen h-screen flex flex-col items-center justify-start gap-20"
     >
-      <motion.div className="mt-32 z-50 text-6xl py-2 text-transparent tracking-wide bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-80%">
+      <motion.div className="mt-10 tablet:mt-32 z-50 text-center text-5xl tablet:text-6xl py-2 text-transparent tracking-wide bg-clip-text bg-gradient-to-b from-[#d8ecf8] to-foreground-100 to-80%">
         Get started today
       </motion.div>
       <CTA wrapped={true} />
