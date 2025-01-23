@@ -91,7 +91,7 @@ const DemoPreview = () => {
   });
 
   return (
-    <motion.div className="relative border-small border-divider rounded-xl bg-content2 shadow-medium">
+    <motion.div className="relative w-full laptop:w-[900px] border-small border-divider rounded-xl bg-content2 shadow-medium">
       <CodeMirror
         value={value}
         onChange={(val) => setValue(val)}
@@ -105,7 +105,6 @@ const DemoPreview = () => {
         })}
         extensions={[javascript({ jsx: true }), themeExt]}
         editable={false}
-        width="900px"
         height="400px"
         basicSetup={{
           lineNumbers: false,
