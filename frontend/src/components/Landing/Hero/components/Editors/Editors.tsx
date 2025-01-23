@@ -52,6 +52,7 @@ const Editors = () => {
           autoPlay
           muted
           loop
+          className="w-[300px] tablet:w-[400px] laptop:[600px]"
           width={600}
           height="auto"
         />
@@ -65,7 +66,7 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-fit h-fit absolute left-1/2 top-1/2 transform rounded-xl shadow-medium overflow-hidden border-small border-divider"
+        className="w-[80%] laptop:w-fit h-fit absolute left-1/2 top-1/2 transform rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
         <video
           src="/video/hero-middle.mp4"
@@ -84,7 +85,7 @@ const Editors = () => {
           duration: 5,
           ease: "easeInOut",
         }}
-        className="w-fit h-fit absolute top-28 -right-36 rounded-xl shadow-medium overflow-hidden border-small border-divider"
+        className="opacity-0 tablet:opacity-100 w-[300px] tablet:w-[300px] laptop:w-fit h-fit absolute top-28 -right-36 rounded-xl shadow-medium overflow-hidden border-small border-divider"
       >
         <video
           src="/video/hero-right.mp4"

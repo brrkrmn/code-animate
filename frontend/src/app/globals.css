@@ -55,3 +55,27 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@media (max-width: 1024px) {
+  .index-module_type__E-SaG {
+    font-size: 60px;
+  }
+
+  .index-module_type__E-SaG::after {
+    width: 6px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 425px) {
+  .index-module_type__E-SaG {
+    font-size: 40px;
+  }
+
+  .index-module_type__E-SaG::after {
+    width: 4px;
+    height: 30px;
+    margin-bottom: 2px;
+  }
+}

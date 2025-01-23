@@ -16,7 +16,7 @@ const Hero = () => {
     <motion.div
       ref={sectionRef}
       style={{ opacity }}
-      className="w-screen h-screen flex flex-col gap-10 items-center pt-[10%] justify-start animate-slide landingBgReverse overflow-hidden"
+      className="w-screen h-screen flex flex-col gap-10 items-center pt-24 tablet:pt-40 laptop:pt-[10%] justify-start animate-slide landingBgReverse overflow-hidden"
     >
       <Title />
       <CTA />

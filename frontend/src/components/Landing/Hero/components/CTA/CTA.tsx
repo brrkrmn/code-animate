@@ -10,7 +10,7 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Spinner from "./components/Spinner/Spinner";
 
-const CTA = ({ wrapped = false }: { wrapped: boolean }) => {
+const CTA = ({ wrapped = false }: { wrapped?: boolean }) => {
   const [isTryoutLoading, setIsTryoutLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isGithubLoading, setIsGithubLoading] = useState(false);
@@ -52,26 +52,28 @@ const CTA = ({ wrapped = false }: { wrapped: boolean }) => {
         ease: "easeInOut",
       }}
       className={`flex ${
-        wrapped ? "flex-col gap-10" : "flex-row gap-4"
+        wrapped ? "flex-col gap-10" : "flex-col tablet:flex-row gap-4"
       } items-center justify-center z-40`}
     >
       <motion.button
         onClick={onTryOut}
         className={`${
-          wrapped ? "h-14 text-xl w-full" : "h-10 w-40"
+          wrapped ? "h-14 text-xl w-full" : "h-10 w-full tablet:w-40"
         } rounded-full flex items-center justify-center gap-1 gradientText shadow-medium bg-content2 border-small border-divider transition duration-400 hover:shadow-large`}
       >
         {isTryoutLoading ? <Spinner /> : "Try it out!"}
       </motion.button>
       <div
-        className={`w-full flex items-center gap-4 ${
-          wrapped ? "flex-col border-t-small border-divider pt-10" : "flex-row"
+        className={` ${
+          wrapped
+            ? "w-fit flex items-center flex-col border-t-small border-divider pt-10 gap-4"
+            : "w-fit flex flex-col tablet:flex-row items-center gap-4"
         }`}
       >
         <motion.button
           onClick={onGoogleLogin}
           className={`w-fit ${
-            wrapped ? "px-12 text-xl h-14" : "px-6 h-10"
+            wrapped ? "px-12 text-xl h-14" : "px-10 tablet:px-6 h-10"
           } flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large`}
         >
           {isGoogleLoading ? (
@@ -84,7 +86,7 @@ const CTA = ({ wrapped = false }: { wrapped: boolean }) => {
         <motion.button
           onClick={onGithubLogin}
           className={`w-fit ${
-            wrapped ? "px-12 text-xl h-14" : "px-6 h-10"
+            wrapped ? "px-12 text-xl h-14" : "px-10 tablet:px-6 h-10"
           } flex items-center justify-center gap-2 rounded-full border-small border-divider gradientText shadow-medium transition hover:shadow-large`}
         >
           {isGithubLoading ? <Spinner /> : <FaGithub />}
