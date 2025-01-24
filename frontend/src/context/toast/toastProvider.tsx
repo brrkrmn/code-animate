@@ -1,7 +1,8 @@
 "use client";
 
 import { Alert } from "@nextui-org/react";
-import { createContext, useContext, useState } from "react";
+import { useParams } from "next/navigation";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ToastContextValue } from "./toastProvider.types";
 
 export const ToastContext = createContext<ToastContextValue>(null);
@@ -19,6 +20,12 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [value, setValue] = useState<null | { title: string; color: string }>(
     null
   );
+  const params = useParams();
+  const id = params.id as string;
+
+  useEffect(() => {
+    setIsVisible(false);
+  }, [id]);
 
   const toast = (toastOption: { title: string; color: string }) => {
     setValue(toastOption);
