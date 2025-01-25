@@ -1,1 +1,1 @@
-export * from "./getScenesFromLs.ts";
+export * from "./getScenesFromLs";
