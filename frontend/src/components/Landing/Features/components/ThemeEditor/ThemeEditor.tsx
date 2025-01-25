@@ -18,6 +18,7 @@ const ThemeEditor = ({ theme, value }: ComponentProps) => {
       borderRadius: "10px",
       padding: "20px 20px",
       overflow: "hidden",
+      pointerEvents: "none",
     },
     ".cm-line": {
       borderRadius: "10px",

@@ -33,7 +33,7 @@ const Features = () => {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-0 w-full">
-        <Marquee pauseOnClick gradientColor="#05060f">
+        <Marquee gradientColor="#05060f">
           {Object.keys(langs).map((lang, index) => (
             <div
               className="border-small border-divider rounded-full bg-content1 shadow-large py-1 px-5 mx-2 my-2 text-lg flex items-center justify-center gradientText transition duration-500 hover:scale-105"
@@ -43,7 +43,7 @@ const Features = () => {
             </div>
           ))}
         </Marquee>
-        <Marquee pauseOnClick gradientColor="#05060f" speed={40}>
+        <Marquee gradientColor="#05060f" speed={40}>
           {themeOptions.map((theme, index) => (
             <ThemeEditor
               key={index}
