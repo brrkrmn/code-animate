@@ -9,6 +9,9 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      tomorrow: ["Tomorrow", "serif"],
+    },
     screens: {
       mobile: "425px",
       tablet: "768px",

@@ -29,7 +29,7 @@ const Demo = () => {
       style={{ background, opacity }}
       className="w-screen h-[120vh] flex flex-col items-center justify-center gap-10 px-4"
     >
-      <motion.div className="gradientText text-4xl text-center">
+      <motion.div className="font-tomorrow gradientText text-4xl text-center">
         Level up your code presentation
       </motion.div>
       <motion.div
