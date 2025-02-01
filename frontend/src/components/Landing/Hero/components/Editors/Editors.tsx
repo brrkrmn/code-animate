@@ -52,6 +52,7 @@ const Editors = () => {
           autoPlay
           muted
           loop
+          preload="auto"
           width="600"
           height="auto"
         />
@@ -71,6 +72,7 @@ const Editors = () => {
           src="/video/hero-middle.mp4"
           autoPlay
           muted
+          preload="auto"
           loop
           width={900}
           height="auto"
@@ -91,6 +93,7 @@ const Editors = () => {
           autoPlay
           muted
           loop
+          preload="auto"
           width={450}
           height="auto"
         />
