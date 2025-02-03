@@ -8,7 +8,29 @@ const getTransactions = (initial: string, target: string) => {
 
   let pos = 0;
 
-  diffSet.forEach((diff) => {
+  diffSet.forEach((diff, index) => {
+    if (diff.added && index > 0) {
+      const prevDiff = diffSet[index - 1];
+      const match = prevDiff.value.match(/(\n\s*)$/);
+
+      if (match) {
+        const trailingNewlineAndSpaces = match[0];
+
+        prevDiff.value = prevDiff.value.slice(
+          0,
+          -trailingNewlineAndSpaces.length
+        );
+
+        diff.value = trailingNewlineAndSpaces + diff.value;
+
+        if (diff.value.endsWith("\n")) {
+          diff.value = diff.value.slice(0, -1);
+        }
+
+        pos -= trailingNewlineAndSpaces.length;
+      }
+    }
+
     if (diff.added) {
       diff.value.split("").map((char, index) => {
         transactions.push({
