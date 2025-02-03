@@ -9,9 +9,7 @@ const getTransactions = (initial: string, target: string) => {
   let pos = 0;
 
   diffSet.forEach((diff) => {
-    if (!diff.added && !diff.removed) {
-      pos += diff.count!;
-    } else if (diff.added) {
+    if (diff.added) {
       diff.value.split("").map((char, index) => {
         transactions.push({
           from: pos + index,
@@ -26,7 +24,9 @@ const getTransactions = (initial: string, target: string) => {
           insert: "",
         });
       }
+      pos -= diff.count;
     }
+    pos += diff.count!;
   });
   return transactions;
 };
