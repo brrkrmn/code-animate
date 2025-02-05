@@ -9,7 +9,7 @@ import Link from "next/link";
 const SceneCard = ({ scene }: { scene: Scene }) => {
   return (
     <Link
-      className="relative group flex items-start justify-between w-full tablet:w-[48%] rounded-3xl h-32 border-small border-divider bg-content1 transition hover:shadow-large"
+      className="relative overflow-hidden group flex items-start justify-between w-full tablet:w-[48%] rounded-3xl h-32 border-small border-divider bg-content1 transition hover:shadow-large"
       href={`/${scene.id}`}
     >
       <div className="w-full h-full basis-3/5 px-5 py-3 flex flex-col justify-between">
