@@ -14,25 +14,32 @@ const getTransactions = (initial: string, target: string) => {
   const prevLineEndsWithNewline = lineDiffSet[0].value.match(/(\n\s*)$/);
   const currentLineEndsWithNewline = lineDiffSet[1].value.match(/(\n\s*)$/);
 
-  const newLineAddedInMiddle =
-    lineDiffSet[1].added &&
-    currentLineEndsWithNewline &&
-    prevLineEndsWithNewline;
+  const newLineAddedOrRemoved =
+    currentLineEndsWithNewline && prevLineEndsWithNewline;
 
-  if (newLineAddedInMiddle) {
+  if (newLineAddedOrRemoved) {
     const prevLineEndingPattern = prevLineEndsWithNewline[0];
     const currentLineEndingPattern = currentLineEndsWithNewline[0];
-
-    const addedLine =
+    const changedLine =
       prevLineEndingPattern +
       lineDiffSet[1].value.slice(0, -currentLineEndingPattern.length);
 
-    addedLine.split("").map((char, index) => {
-      transactions.push({
-        from: lineDiffSet[0].value.length - 1 + index,
-        insert: char,
+    if (lineDiffSet[1].added) {
+      changedLine.split("").map((char, index) => {
+        transactions.push({
+          from: lineDiffSet[0].value.length - 1 + index,
+          insert: char,
+        });
       });
-    });
+    } else if (lineDiffSet[1].removed) {
+      for (let i = changedLine.length - 1; i >= 0; i--) {
+        transactions.push({
+          from: lineDiffSet[0].value.length + i - 1,
+          to: lineDiffSet[0].value.length + i,
+          insert: "",
+        });
+      }
+    }
   } else {
     charDiffSet.forEach((diff) => {
       if (diff.added) {
