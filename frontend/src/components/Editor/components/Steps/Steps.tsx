@@ -1,10 +1,11 @@
 import { useSceneContext } from "@/context/scene";
 import { Step } from "@/services/scene/scene.types";
-import { ScrollShadow } from "@nextui-org/react";
+import { ScrollShadow, Tooltip } from "@nextui-org/react";
 import { createRef, useEffect } from "react";
 import { FaMapMarker } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
+import { IoInformation } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
 
 const Steps = () => {
@@ -58,7 +59,18 @@ const Steps = () => {
   );
 
   return (
-    <div className="w-full py-2 flex flex-col items-center justify-center gap-2 overflow-x-scroll">
+    <div className="relative w-full py-2 flex flex-col items-center justify-center gap-2 overflow-x-scroll">
+      <Tooltip
+        placement="left"
+        classNames={{
+          base: "bg-background border-warning-200  border-1 rounded-full text-warning-400 rounded-full",
+        }}
+        content="For best results, changes to multiple lines in the same step is not recommended."
+      >
+        <div className="absolute right-0 top-0 border-1 rounded-full p-1 text-warning-400 border-warning-200 px-3 transition hover:text-background hover:bg-warning-300">
+          <IoInformation className="text-xl" />
+        </div>
+      </Tooltip>
       <p className="text-foreground-100 font-semibold">
         Step: {currentStepNumber}
       </p>
