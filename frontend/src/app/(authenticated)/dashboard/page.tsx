@@ -4,6 +4,8 @@ import { queryClient } from "@/utils/QueryClient";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Page from "./components/Page/Page";
 
+export const dynamic = "force-dynamic";
+
 const Dashboard = async () => {
   const qClient = queryClient();
   await qClient.fetchQuery({
