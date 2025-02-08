@@ -14,9 +14,7 @@ backendService.interceptors.request.use(async (config) => {
   let session;
 
   if (typeof window === "undefined") {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { auth } = require("@/auth");
-
+    const { auth } = await import("@/auth");
     session = await auth();
   } else {
     session = await getSession();
