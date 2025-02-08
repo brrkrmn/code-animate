@@ -1,8 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import 'express-async-errors';
-import mongoose from 'mongoose';
-import authRouter from './controllers/auth';
+import mongoose from "mongoose";
 import scenesRouter from "./controllers/scenes";
 import {
   authenticateUser,
@@ -27,7 +26,6 @@ app.use(cors());
 
 app.use(extractUser);
 
-app.use("/api/auth", authRouter);
 app.use("/api/scenes", authenticateUser, scenesRouter);
 
 app.use(errorHandler);
