@@ -22,13 +22,7 @@ mongoose.connect(MONGODB_URI as string)
     });
 
 app.use(express.json())
-app.use(
-  cors({
-    origin: ["https://codymate.com"],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  })
-);
+app.use(cors());
 
 app.use(extractUser);
 
