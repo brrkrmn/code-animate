@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "cross-env NODE_ENV=production node dist/index.js",
