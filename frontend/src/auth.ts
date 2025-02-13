@@ -6,6 +6,7 @@ import client from "./lib/db";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(client),
   session: { strategy: "jwt" },
+  trustHost: true,
   callbacks: {
     authorized: async ({ auth }) => {
       return !!auth;
