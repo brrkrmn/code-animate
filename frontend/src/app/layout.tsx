@@ -3,6 +3,7 @@ import ReactQueryProvider from "@/providers/ReactQueryProvider/ReactQueryProvide
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import PlausibleProvider from "next-plausible";
 import React from "react";
 import AuthLayout from "./authLayout";
 import "./globals.css";
@@ -19,6 +20,9 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" className="dark">
+      <head>
+        <PlausibleProvider domain="codymate.com" />
+      </head>
       <body className="antialiased">
         <ReactQueryProvider>
           <ThemeProvider>
