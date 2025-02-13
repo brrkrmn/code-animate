@@ -11,11 +11,9 @@ import {
 
 const sceneService = {
   getUserScenes: async () => {
-    console.log("yoyoyoyo");
     const response = await backendService.get<GetUserScenesResponse>(
       API_URLS.scenes.all
     );
-    console.log("heyheyoheh");
     return response.data;
   },
   getScene: async (id: string) => {

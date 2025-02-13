@@ -6,10 +6,16 @@ import Page from "./components/Page/Page";
 
 const Dashboard = async () => {
   const qClient = queryClient();
-  await qClient.fetchQuery({
-    queryKey: ["scenes"],
-    queryFn: sceneService.getUserScenes,
-  });
+
+  try {
+    await qClient.fetchQuery({
+      queryKey: ["scenes"],
+      queryFn: sceneService.getUserScenes,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
 
   const dehydratedState = dehydrate(qClient);
 
