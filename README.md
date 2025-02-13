@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://github.com/brrkrmn/code-animate/blob/main/frontend/src/app/icon.svg" alt="Codymate logo" width="80">
+  <img src="https://github.com/brrkrmn/codymate/blob/main/frontend/src/app/icon.svg" alt="Codymate logo" width="80">
   <br>
   Codymate
   <br>
@@ -34,7 +34,7 @@ To clone and run this project, you'll need Git and Node.js (which comes with npm
 
 1. **Clone frontend repo**
 ```bash
-git clone https://github.com/brrkrmn/code-animate.git
+git clone https://github.com/brrkrmn/codymate.git
 ```
 
 <br>
@@ -43,7 +43,7 @@ git clone https://github.com/brrkrmn/code-animate.git
 
 1. **Cd into the repo**
 ```bash
-cd code-animate/frontend
+cd codymate/frontend
 ```
 2. **Install dependencies**
 ```bash
@@ -60,7 +60,7 @@ npm run dev
 
 1. **Go into the repo**
 ```bash
-cd code-animate/backend
+cd codymate/backend
 ```
 2. **Install dependencies**
 ```bash
