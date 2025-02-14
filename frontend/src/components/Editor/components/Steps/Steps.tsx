@@ -63,11 +63,11 @@ const Steps = () => {
       <Tooltip
         placement="left"
         classNames={{
-          base: "bg-background border-warning-200  border-1 rounded-full text-warning-400 rounded-full",
+          base: "bg-background border-warning-200 border-1 text-warning-400 rounded-full",
         }}
         content="For best results, changes to multiple lines in the same step is not recommended."
       >
-        <div className="absolute right-0 top-0 border-1 rounded-full p-1 text-warning-400 border-warning-200 px-3 transition hover:text-background hover:bg-warning-300">
+        <div className="hidden mobile:block absolute right-0 top-0 border-1 rounded-full p-1 text-warning-400 border-warning-200 px-3 transition hover:text-background hover:bg-warning-300">
           <IoInformation className="text-xl" />
         </div>
       </Tooltip>
