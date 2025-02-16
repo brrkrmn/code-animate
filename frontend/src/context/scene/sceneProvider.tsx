@@ -34,11 +34,11 @@ const SceneProvider = ({
   const [currentStepNumber, setCurrentStepNumber] = useState(0);
 
   useEffect(() => {
-    if (scene) {
+    if (!changedScene && scene) {
       setRefScene(scene);
       setChangedScene(scene);
     }
-  }, [scene]);
+  }, [scene, changedScene]);
 
   useEffect(() => {
     setIsDirty(refScene !== changedScene);
@@ -64,6 +64,7 @@ const SceneProvider = ({
   }, [changedScene?.language, themeExt]);
 
   const updateScene = (scene: Partial<Scene>) => {
+    console.log("in update scene: ", scene);
     setChangedScene((prev) => ({ ...prev, ...scene } as Scene));
   };
 
