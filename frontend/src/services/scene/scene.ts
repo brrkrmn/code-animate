@@ -17,10 +17,15 @@ const sceneService = {
     return response.data;
   },
   getScene: async (id: string) => {
-    const response = await backendService.get<GetSceneResponse>(
-      API_URLS.scenes.byId(id)
-    );
-    return response.data;
+    try {
+      const response = await backendService.get<GetSceneResponse>(
+        API_URLS.scenes.byId(id)
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   },
   createScene: async (data: CreateSceneRequest) => {
     const response = await backendService.post<CreateSceneResponse>(

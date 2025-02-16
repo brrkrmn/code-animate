@@ -6,7 +6,7 @@ import { toasts } from "@/context/toast/toast.constants";
 import { Scene } from "@/services/scene/scene.types";
 import getSceneFromLs from "@/utils/localStorage/getSceneFromLs/getSceneFromLs";
 import removeOrEditSceneInLs from "@/utils/localStorage/removeOrEditSceneInLs/removeOrEditSceneInLs";
-import { useParams, useRouter } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 
 const TryoutLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -26,7 +26,7 @@ const TryoutLayout = ({ children }: { children: React.ReactNode }) => {
     toast(toasts.createScene.success);
   };
 
-  if (!scene) return null;
+  if (!scene) return notFound();
   return (
     <SceneProvider onSave={onSave} deleteScene={deleteScene} scene={scene}>
       {children}
