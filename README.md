@@ -107,6 +107,7 @@ Codymate is an open-source project, and your help is always welcome! I encourage
   - Theme selection should show a visible scrollbar to imply there are more options
   - Improve the colors of the save, preview, delete and warning buttons on editor page
   - Add an option to automatically play the slides, without requiring button clicks
+  - Allow users to select the speed of the typing animation 
   - Clarify project goal better on landing page – Improve the explanation of what CodyMate does and how it benefits developers.
 
 <br>
