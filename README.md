@@ -32,6 +32,16 @@
 
 <br>
 
+## Table of Contents
+- [Development Setup](#development-setup)
+  - [Setting up Frontend](#setting-up-frontend)
+  - [Setting up Backend](#setting-up-backend)
+- [Contributing](#contributing)
+- [Ideas for Improvement](#ideas-for-improvement)
+- [License](#license)
+
+<br>
+
 ## Development Setup
 
 To clone and run this project, you'll need Git and Node.js (which comes with npm) installed on your computer.
@@ -45,7 +55,7 @@ git clone https://github.com/brrkrmn/codymate.git
 
 <br>
 
-### Starting Frontend
+### Setting up Frontend
 
 1. **Cd into the repo**
 ```bash
@@ -76,6 +86,28 @@ npm install
 ```bash
 npm run dev
 ```
+
+<br>
+
+## Contributing
+
+Codymate is an open-source project, and your help is always welcome! I encourage you to go through the [Contribution Guidelines](CONTRIBUTING.md) and check out the [Ideas for Improvement](#ideas-for-improvement) section to contribute Codymate.
+
+<br>
+
+## Ideas for Improvement
+  - Adding a search bar to language selection
+  - Adding default presets for background selection
+  - Add a light mode option
+  - Show a confirmation prompt before deleting
+  - Implement auto-save in editor to prevent losing changes
+  - Make the "Untitled" input more editable
+  - Handle unnecessary scrollbars throughout the project for different browsers
+  - Add a prompt to prevent accidental page exits
+  - Theme selection should show a visible scrollbar to imply there are more options
+  - Improve the colors of the save, preview, delete and warning buttons on editor page
+  - Add an option to automatically play the slides, without requiring button clicks
+  - Clarify project goal better on landing page – Improve the explanation of what CodyMate does and how it benefits developers.
 
 <br>
 
